@@ -1,6 +1,8 @@
 import 'package:hotels_booking_app/data/models/Filter/Search/Link_model.dart';
 import 'package:hotels_booking_app/data/models/Filter/Search/hotel.dart';
 
+import '../Auth/login_model.dart';
+
 class Booking {
   Booking({
     required this.status,
@@ -111,7 +113,7 @@ class BookingData {
     required this.type,
     required this.createdAt,
     required this.updatedAt,
-    //required this.user,
+    required this.user,
     required this.hotel,
   });
   late final int id;
@@ -120,7 +122,7 @@ class BookingData {
   late final String type;
   late final String createdAt;
   late final String updatedAt;
-  //late final userData user;
+  late final userData user;
   late final Hotel hotel;
 
   BookingData.fromJson(Map<String, dynamic> json){
@@ -130,7 +132,7 @@ class BookingData {
     type = json['type'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
-    //user = userData.fromJson(json['user']);
+    user = userData.fromJson(json['user']);
     hotel = Hotel.fromJson(json['hotel']);
   }
 
