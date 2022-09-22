@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:hotels_booking_app/presentation/Filter/allFacilties/allFacilitiesScreen.dart';
+
+import 'busieness_logic/FilterCubit/cubit.dart';
+import 'injection/injection.dart';
 
 void main() {
+  initGetIt();
   runApp(const MyApp());
 }
 
@@ -15,7 +22,9 @@ class MyApp extends StatelessWidget {
 
         primarySwatch: Colors.blue,
       ),
-     // home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: BlocProvider(
+          create:(context)=>getIt<FilterCubit>() ,
+          child: allFacilitiesScreen())
     );
   }
 }
