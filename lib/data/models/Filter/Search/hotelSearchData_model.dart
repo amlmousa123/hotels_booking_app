@@ -1,8 +1,8 @@
-import 'hotel.dart';
+import 'Hotel.dart';
 import 'Link_model.dart';
 class hotelsSearchData {
   int? currentPage;
-  List<hotel>? hotelsList;
+  List<Hotel>? hotelsList;
   String? firstPageUrl;
   int? from;
   int? lastPage;
@@ -33,9 +33,9 @@ class hotelsSearchData {
   hotelsSearchData.fromJson(Map<String, dynamic> json) {
     currentPage = json['current_page'];
     if (json['data'] != null) {
-      hotelsList = <hotel>[];
+      hotelsList = <Hotel>[];
       json['data'].forEach((v) {
-        hotelsList!.add(new hotel.fromJson(v));
+        hotelsList!.add(new Hotel.fromJson(v));
       });
     }
     firstPageUrl = json['first_page_url'];

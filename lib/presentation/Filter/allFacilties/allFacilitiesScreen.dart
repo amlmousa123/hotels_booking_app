@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hotels_booking_app/busieness_logic/FilterCubit/cubit.dart';
 import 'package:hotels_booking_app/busieness_logic/FilterCubit/states.dart';
-import 'package:hotels_booking_app/data/models/Filter/Get%20facilities/facilitiesData_model.dart';
-import 'package:hotels_booking_app/data/models/Filter/Get%20facilities/facilities_model.dart';
+
+
 import 'package:hotels_booking_app/data/models/Filter/Search/hotelsSearch_model.dart';
 
 import '../../../busieness_logic/FilterCubit/cubit.dart';
 import '../../../busieness_logic/FilterCubit/states.dart';
+import '../../../data/models/Filter/Get facilities/facilities_model.dart';
 class allFacilitiesScreen extends StatefulWidget {
   @override
   _allFacilitiesScreenState createState() => _allFacilitiesScreenState();
@@ -21,9 +22,9 @@ class _allFacilitiesScreenState extends State<allFacilitiesScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    //BlocProvider.of<HotelCubit>(context).emitGetAllFacilities();
+    BlocProvider.of<FilterCubit>(context).emitGetAllFacilities();
     print("fac[0]");
-   BlocProvider.of<FilterCubit>(context).emitGetsearchedHotels(facilities1: 3,facilities2: 4);
+   //BlocProvider.of<FilterCubit>(context).emitGetsearchedHotels(facilities1: 3,facilities2: 4);
 
   }
   @override
