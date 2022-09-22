@@ -1,9 +1,9 @@
 import 'dart:convert';
 
 import 'package:hotels_booking_app/data/models/Filter/Search/hotelsSearch_model.dart';
-import 'package:hotels_booking_app/data/web_services/web_services.dart';
+import '../../web_services/FilterWebsevices/web_services.dart';
 
-import '../models/Filter/Get facilities/facilities_model.dart';
+import '../../models/Filter/Get facilities/facilities_model.dart';
 
 class MyRepo{
   final webServices WebService;

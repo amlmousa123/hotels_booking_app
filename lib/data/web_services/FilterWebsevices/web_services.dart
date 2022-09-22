@@ -3,7 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:dio/dio.dart';
 import 'dart:convert';
-import '../models/Filter/Search/hotelsSearch_model.dart';
+import '../../models/Filter/Search/hotelsSearch_model.dart';
 part 'web_services.g.dart';
 @RestApi(baseUrl: "http://api.mahmoudtaha.com/api/")
 abstract class webServices{

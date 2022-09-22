@@ -1,6 +1,6 @@
 import 'package:hotels_booking_app/busieness_logic/FilterCubit/states.dart';
 
-import '../../data/repository/repository.dart';
+import '../../data/repository/FilterRepo/repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 class FilterCubit extends Cubit<Filterstates> {
   FilterCubit(this.myrepo) : super(initialhotelstate());
