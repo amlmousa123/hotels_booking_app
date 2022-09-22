@@ -1,6 +1,6 @@
 import 'hotelFacilties_model.dart';
 
-class hotel {
+class Hotel {
   int? id;
   String? name;
   String? description;
@@ -14,7 +14,7 @@ class hotel {
   List<HotelImages>? hotelImages;
   List<hotelFacilities>? facilities;
 
-  hotel(
+  Hotel(
       {this.id,
         this.name,
         this.description,
@@ -28,7 +28,7 @@ class hotel {
         this.hotelImages,
         this.facilities});
 
-  hotel.fromJson(Map<String, dynamic> json) {
+  Hotel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     description = json['description'];
