@@ -1,0 +1,16 @@
+import 'package:dio/dio.dart';
+import '../models/Booking/booking_ model.dart';
+import 'package:retrofit/retrofit.dart';
+
+part 'hotel_api.g.dart';
+
+@RestApi(baseUrl: 'https://www.postman.com/collections/')
+abstract class RestClient {
+  factory RestClient(Dio dio, {String baseUrl}) = _RestClient;
+
+  @GET('/enzoftware/hotel_booking_app/master/server/hotels.json')
+  Future<List<Hotel>> getHotels();
+}
+
+
+
