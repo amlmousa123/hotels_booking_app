@@ -1,0 +1,409 @@
+{
+    "info": {
+        "_postman_id": "cd713bda-a462-4e8f-b960-dcc65481f7fc",
+        "name": "Algoriza Bookign APIs",
+        "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "auth",
+            "item": [
+                {
+                    "name": "register",
+                    "id": "7f35dbf3-3114-4f5c-9d8a-9ed30815cf5c",
+                    "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "formdata",
+                            "formdata": [
+                                {
+                                    "key": "name",
+                                    "value": "Abdullah Mansour",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "email",
+                                    "value": "abdullah.mansour@gmail.com",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "password",
+                                    "value": "123456",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "password_confirmation",
+                                    "value": "123456",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "image",
+                                    "type": "file",
+                                    "src": [],
+                                    "disabled": true
+                                }
+                            ]
+                        },
+                        "url": "http://api.mahmoudtaha.com/api/auth/register"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "login",
+                    "id": "6fc075bf-cd16-43e6-a7f2-a1dfb5f61f36",
+                    "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "formdata",
+                            "formdata": [
+                                {
+                                    "key": "email",
+                                    "value": "abdullah.mansour@gmail.com",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "password",
+                                    "value": "123456",
+                                    "type": "text"
+                                }
+                            ]
+                        },
+                        "url": "http://api.mahmoudtaha.com/api/auth/login"
+                    },
+                    "response": []
+                }
+            ],
+            "id": "ac9c6e3f-bb9d-4454-b4ea-1cd7270f3b54"
+        },
+        {
+            "name": "filter",
+            "item": [
+                {
+                    "name": "search-hotels",
+                    "id": "ba2f5c21-7b60-4aab-ac58-55bb997b3700",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "http://api.mahmoudtaha.com/api/search-hotels?name=5000&count=10&page=1",
+                            "protocol": "http",
+                            "host": [
+                                "api",
+                                "mahmoudtaha",
+                                "com"
+                            ],
+                            "path": [
+                                "api",
+                                "search-hotels"
+                            ],
+                            "query": [
+                                {
+                                    "key": "name",
+                                    "value": "5000"
+                                },
+                                {
+                                    "key": "address",
+                                    "value": "tanta",
+                                    "disabled": true
+                                },
+                                {
+                                    "key": "max_price",
+                                    "value": "1000",
+                                    "disabled": true
+                                },
+                                {
+                                    "key": "min_price",
+                                    "value": "100",
+                                    "disabled": true
+                                },
+                                {
+                                    "key": "facilities[0]",
+                                    "value": "1",
+                                    "disabled": true
+                                },
+                                {
+                                    "key": "facilities[1]",
+                                    "value": "",
+                                    "disabled": true
+                                },
+                                {
+                                    "key": "latitude",
+                                    "value": "30.070049",
+                                    "disabled": true
+                                },
+                                {
+                                    "key": "longitude",
+                                    "value": "31.348766",
+                                    "disabled": true
+                                },
+                                {
+                                    "key": "distance",
+                                    "value": "2",
+                                    "disabled": true
+                                },
+                                {
+                                    "key": "count",
+                                    "value": "10"
+                                },
+                                {
+                                    "key": "page",
+                                    "value": "1"
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "get-facilities",
+                    "id": "eb4e8f19-ecb4-4f65-a1e5-d6d559aa81b1",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": "http://api.mahmoudtaha.com/api/facilities"
+                    },
+                    "response": []
+                }
+            ],
+            "id": "4a891687-0038-4b06-9ea0-28f53dba153a"
+        },
+        {
+            "name": "explore",
+            "item": [
+                {
+                    "name": "hotels",
+                    "id": "c2698924-3835-40bf-bc0f-4280bf26a8c1",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "http://api.mahmoudtaha.com/api/hotels?count=10&page=1",
+                            "protocol": "http",
+                            "host": [
+                                "api",
+                                "mahmoudtaha",
+                                "com"
+                            ],
+                            "path": [
+                                "api",
+                                "hotels"
+                            ],
+                            "query": [
+                                {
+                                    "key": "count",
+                                    "value": "10"
+                                },
+                                {
+                                    "key": "page",
+                                    "value": "1"
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                }
+            ],
+            "id": "99d8882a-7f16-4b64-9049-4950a10177b4"
+        },
+        {
+            "name": "booking",
+            "item": [
+                {
+                    "name": "create-booking",
+                    "id": "b457510b-c2f4-4d9a-a6cf-f736830108fe",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "token",
+                                "value": "{{token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "formdata",
+                            "formdata": [
+                                {
+                                    "key": "user_id",
+                                    "value": "11",
+                                    "type": "text",
+                                    "disabled": true
+                                },
+                                {
+                                    "key": "hotel_id",
+                                    "value": "15",
+                                    "type": "text"
+                                }
+                            ]
+                        },
+                        "url": "http://api.mahmoudtaha.com/api/create-booking"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "update-booking-status",
+                    "id": "b03c5511-0040-4f21-8ac1-95aefadb54f5",
+                    "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "formdata",
+                            "formdata": [
+                                {
+                                    "key": "booking_id",
+                                    "value": "7",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "type",
+                                    "value": "cancelled",
+                                    "description": "upcomming - cancelled - completed",
+                                    "type": "text"
+                                }
+                            ]
+                        },
+                        "url": "http://api.mahmoudtaha.com/api/update-booking-status"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "get-bookings",
+                    "id": "211277dc-440f-467b-a062-4150a3ffffcd",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "token",
+                                "value": "{{token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "http://api.mahmoudtaha.com/api/get-bookings?type=cancelled&count=10",
+                            "protocol": "http",
+                            "host": [
+                                "api",
+                                "mahmoudtaha",
+                                "com"
+                            ],
+                            "path": [
+                                "api",
+                                "get-bookings"
+                            ],
+                            "query": [
+                                {
+                                    "key": "type",
+                                    "value": "cancelled",
+                                    "description": "upcomming - cancelled - completed"
+                                },
+                                {
+                                    "key": "count",
+                                    "value": "10"
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                }
+            ],
+            "id": "74e87e75-5376-4341-991d-961bbb90a7e5"
+        },
+        {
+            "name": "profile",
+            "item": [
+                {
+                    "name": "profile-info",
+                    "id": "7206d5e2-0c14-419f-8fb4-cf006b7b0d71",
+                    "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                    },
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "token",
+                                "value": "{{token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "formdata",
+                            "formdata": []
+                        },
+                        "url": "http://api.mahmoudtaha.com/api/auth/profile-info"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "update-info",
+                    "id": "a8562ca7-ba61-4e9c-82fe-3199778f8cef",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "token",
+                                "value": "{{token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "formdata",
+                            "formdata": [
+                                {
+                                    "key": "name",
+                                    "value": "Abdullah Mansour",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "email",
+                                    "value": "abdullah.mansour@gmail.com",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "image",
+                                    "type": "file",
+                                    "src": "/Users/abdullah_mansour/Data/Muilt/Designs/Li_logo.png"
+                                }
+                            ]
+                        },
+                        "url": "http://api.mahmoudtaha.com/api/auth/update-info"
+                    },
+                    "response": []
+                }
+            ],
+            "id": "a75247fb-a2a8-424c-8d7b-06fa74b0c90b"
+        }
+    ],
+    "event": [
+        {
+            "listen": "prerequest",
+            "script": {
+                "id": "ead3adab-0a02-4175-adf8-626a8362dcb1",
+                "type": "text/javascript",
+                "exec": [
+                    ""
+                ]
+            }
+        },
+        {
+            "listen": "test",
+            "script": {
+                "id": "5a6ca255-7447-4bd3-adc9-fd8c9cdd8496",
+                "type": "text/javascript",
+                "exec": [
+                    ""
+                ]
+            }
+        }
+    ],
+    "variable": [
+        {
+            "id": "01606ba9-015d-4526-8b93-146d0290213f",
+            "key": "token",
+            "value": "DnkaEA2eU1DNZmKIpx5I7u6ptaKeEGAA1nq4bFkClgBsYsWLyTMNsJD7O06u",
+            "type": "string"
+        }
+    ]
+}
