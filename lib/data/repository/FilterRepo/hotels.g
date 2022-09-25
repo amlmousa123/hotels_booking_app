@@ -8,7 +8,7 @@ part of 'hotel_api.dart';
 
 class _RestClient implements RestClient {
   _RestClient(this._dio, {this.baseUrl}) {
-    baseUrl ??= 'https://www.postman.com/collections';
+    baseUrl ??= 'https://schema.getpostman.com/json/collection/v2.0.0/collection.json';
   }
 
   final Dio _dio;
