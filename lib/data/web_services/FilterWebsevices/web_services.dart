@@ -12,7 +12,8 @@ abstract class webServices{
 
   @GET("facilities")
   Future<getFacilities> getAllFacilities();
-
+  @GET("search-hotels")
+  Future<hotelsSearch> getAllHotels();
    @GET("search-hotels")
    Future<hotelsSearch> searchHotels(
 

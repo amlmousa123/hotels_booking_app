@@ -1,4 +1,4 @@
-import 'Hotel.dart';
+import 'hotel.dart';
 import 'Link_model.dart';
 class hotelsSearchData {
   int? currentPage;

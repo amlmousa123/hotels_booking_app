@@ -14,19 +14,27 @@ class MyRepo{
  var response= await WebService.getAllFacilities();
 return response;
   }
+  Future<hotelsSearch> getAllHotels()async{
+
+
+    var response= await WebService.getAllHotels();
+    print("from alllllll");
+    print(response);
+    return response;
+  }
 
   Future<hotelsSearch> searchHotels(
-      var name,
-  var address,
-  var maxprice,
-  var minprice,
-  var facilities1,
-  var facilities2,
-  var latitude,
-  var longitude,
-  var distance,
-  var count,
-  var page,
+  {    var name=null,
+  var address=null,
+  var maxprice=null,
+  var minprice=null,
+  var facilities1=null,
+  var facilities2=null,
+  var latitude=null,
+  var longitude=null,
+  var distance=null,
+  var count=null,
+  var page=null,}
 
 
       )async{
