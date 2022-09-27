@@ -10,17 +10,17 @@ import '../Filteration/FilterationScreen.dart';
 import '../../widgets/NoHotelsFound.dart';
 import '../searchHotels/SearchScreen.dart';
 
-class home_screen extends StatefulWidget {
+class explore_screen extends StatefulWidget {
   @override
-  State<home_screen> createState() => _home_screenState();
+  State<explore_screen> createState() => _explore_screenState();
 }
 
-class _home_screenState extends State<home_screen> {
+class _explore_screenState extends State<explore_screen> {
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    BlocProvider.of<FilterCubit>(context).getAllhotels();
+   // BlocProvider.of<FilterCubit>(context).getAllhotels();
   }
   @override
   Widget build(BuildContext context) {
@@ -28,8 +28,8 @@ class _home_screenState extends State<home_screen> {
     return Scaffold(
         resizeToAvoidBottomInset: false,
         body: SafeArea(
-            child: Container(
-                width: double.infinity,
+            child: Padding(
+                //width: double.infinity,
                 padding: const EdgeInsets.all(20.0),
                 child: SingleChildScrollView(
                     child: Column(
@@ -42,7 +42,9 @@ class _home_screenState extends State<home_screen> {
                           IconButton(
                               padding: EdgeInsets.zero,
                               constraints: BoxConstraints(),
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
                               icon: Icon(Icons.arrow_back)),
                           const Align(
                             alignment: Alignment.center,
@@ -54,8 +56,24 @@ class _home_screenState extends State<home_screen> {
                                   fontWeight: FontWeight.bold),
                             ),
                           ),
-                          Icon(Icons.map_outlined)
-                        ],
+
+                          BlocBuilder<FilterCubit,Filterstates>(
+                              builder: (context, state) {
+                                if (FilterCubit.isShowMap == false) {
+                                  return IconButton(icon: Icon(
+                                      Icons.map_outlined), onPressed: () {
+                                    FilterCubit.get(context).showMap(true);
+                                  },);
+                                }
+                                else {
+                                  return IconButton(icon: const Icon(
+                                      Icons.format_list_bulleted_outlined),
+                                    onPressed: () {
+                                      FilterCubit.get(context).showMap(false);
+                                    },
+                                  );
+                                }
+                              } )],
                       ),
                       SizedBox(
                         height: 15,
@@ -71,8 +89,8 @@ class _home_screenState extends State<home_screen> {
                                 //     BlocProvider.of<FilterCubit>(context)
                                 //         .searchcontroller,
                                 onchanged: (searchedhotels) {
-                                  BlocProvider.of<FilterCubit>(context)
-                                      .searchedfunc(searchedhotels);
+                                  // BlocProvider.of<FilterCubit>(context)
+                                  //     .searchedfunc(searchedhotels);
                                 },
                                 hintText: "Search Hotels",
                                 prefixIcon: Icon(Icons.search)),
@@ -124,24 +142,25 @@ class _home_screenState extends State<home_screen> {
                       ),
                       BlocBuilder<FilterCubit, Filterstates>(
                           builder: (context, state) {
-                             if (BlocProvider.of<FilterCubit>(context)
-                                 .allHotels
+                             if (FilterCubit
+                                 .FilteredHotels
                                  .data
                                  ?.hotelsList
-                                 ?.isNotEmpty==true) {
+                                 ?.isNotEmpty==true)
+                             {
                                return ListView.builder(
                             shrinkWrap: true,
                             physics: NeverScrollableScrollPhysics(),
                             padding: EdgeInsets.all(8),
-                            itemCount: BlocProvider.of<FilterCubit>(context)
-                                .allHotels
+                            itemCount: FilterCubit
+                                .FilteredHotels
                                 .data
                                 ?.hotelsList
                                 ?.length,
                             itemBuilder: (BuildContext cxt, int index) {
                               return HotelCardItem(
-                                hotel: (BlocProvider.of<FilterCubit>(context)
-                                    .allHotels
+                                hotel: (FilterCubit
+                                    .FilteredHotels
                                     .data
                                     ?.hotelsList![index])!,
                               );

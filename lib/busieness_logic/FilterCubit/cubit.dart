@@ -10,13 +10,15 @@ import '../../data/repository/FilterRepo/repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 class FilterCubit extends Cubit<Filterstates> {
-  SfRangeValues pricevalues = SfRangeValues(0.0, 0.0);
+  SfRangeValues pricevalues = SfRangeValues(0.0, 6000);
  SharedPreferences? prefs;
   FilterCubit(this.myrepo) : super(initialhotelstate());
   static FilterCubit get(context) => BlocProvider.of(context);
+  static bool isShowMap=false;
   final searchcontroller=TextEditingController();
    List<bool> isswitchedlist=[];
   hotelsSearch allHotels=new hotelsSearch();
+  static hotelsSearch FilteredHotels=new hotelsSearch();
   List adresses=['Not selected','rome','tanta'];
   String selectedAdresse='Not selected';
   static hotelsSearch searchedhotels=new hotelsSearch();
@@ -52,6 +54,7 @@ class FilterCubit extends Cubit<Filterstates> {
  void getAllhotels(){
 myrepo.getAllHotels().then((value) {
       allHotels=value;
+      FilteredHotels=value;
 
       emit(getAllHotelsState());
 
@@ -121,6 +124,12 @@ myrepo.getAllHotels().then((value) {
    selectedAdresse=selected;
     emit(updateaddressState());
   }
+  void showMap(bool isShow)
+  {
+    isShowMap=isShow;
+    emit(ShowMapState());
+
+  }
   void emitGetsearchedHotels(
       {var name=null,
       var address=null,
@@ -149,10 +158,10 @@ myrepo.getAllHotels().then((value) {
       distance:distance,
       count:count,
       page:page,
-    ).then((searchedhotels) {
+    ).then((filterdhotels) {
 
 
-      allHotels=searchedhotels;
+      FilteredHotels=filterdhotels;
       emit(getAllHotelsState());
      // emit(searchHotelsState(searchedhotels));
 

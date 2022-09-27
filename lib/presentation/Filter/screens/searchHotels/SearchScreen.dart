@@ -56,10 +56,7 @@ print("from init");
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
-          child: BlocBuilder<FilterCubit,Filterstates>(
-            builder:(context,state)
-          {
-          return SingleChildScrollView(
+          child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -77,7 +74,7 @@ print("from init");
                       ,fontWeight: FontWeight.bold),),
               SizedBox(height: 20,),
 
-              Row(
+                  Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Expanded(
@@ -115,56 +112,62 @@ print("from init");
                   SizedBox(height: 15,),
 
 
-                 
-                  ConditionalBuilder(
-                    condition: ( BlocProvider.of<FilterCubit>(context).searchcontroller.text.isNotEmpty
-                    || FilterCubit.lastsearches?.isNotEmpty==true
-                    ),
-              builder: (BuildContext context) {
-                      print("builderrrrrrr");
-
-
-                      if(FilterCubit.searchedhotels.data?.hotelsList?.isNotEmpty==true) {
-
-                        return ListView.builder(
-                        shrinkWrap: true,
-                            physics: NeverScrollableScrollPhysics(),
-                            //padding: EdgeInsets.all(8),
-                            itemCount: FilterCubit.searchedhotels.data?.hotelsList?.length,
-                            itemBuilder: (BuildContext cxt, int index) {
-                              return HotelCardItem(
-                              hotel:
-                             ( FilterCubit.searchedhotels.data?.hotelsList![index])!,
-
-
-
-                              );
-
-                            });
-                      } else {
-                        return   NoHotelsFound(message:'No Hotels Found',image: "assets/images/hotel.svg",);
-                      }
-
-
-
-              },
-                    fallback:(BuildContext context) { return
-                    Container();}
-
+    BlocBuilder<FilterCubit,Filterstates>(
+    builder:(context,state) {
+      return
+        ConditionalBuilder(
+            condition: (BlocProvider
+                .of<FilterCubit>(context)
+                .searchcontroller
+                .text
+                .isNotEmpty
+                || FilterCubit.lastsearches?.isNotEmpty == true
             ),
+            builder: (BuildContext context) {
+              print("builderrrrrrr");
 
 
+              if (FilterCubit.searchedhotels.data?.hotelsList?.isNotEmpty ==
+                  true) {
+                return ListView.builder(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    //padding: EdgeInsets.all(8),
+                    itemCount: FilterCubit.searchedhotels.data?.hotelsList
+                        ?.length,
+                    itemBuilder: (BuildContext cxt, int index) {
+                      return HotelCardItem(
+                        hotel:
+                        (FilterCubit.searchedhotels.data?.hotelsList![index])!,
+
+
+                      );
+                    });
+              } else {
+                return NoHotelsFound(message: 'No Hotels Found',
+                  image: "assets/images/hotel.svg",);
+              }
+            },
+            fallback: (BuildContext context) {
+              return
+                Container();
+            }
+
+        );
+
+
+    })
                 ],
 
 
               ),
-          );
+          )
 
 
-          }
+
           ),
         ),
-      ),
+
       
       
     );

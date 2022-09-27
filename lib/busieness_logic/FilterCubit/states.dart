@@ -36,3 +36,5 @@ class searchHotelsState extends Filterstates{
 
 }
 class getAllHotelsState extends Filterstates{}
+class getFilterdHotelsState extends Filterstates{}
+class ShowMapState extends Filterstates{}

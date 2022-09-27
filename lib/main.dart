@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hotels_booking_app/busieness_logic/FilterCubit/states.dart';
 import 'package:hotels_booking_app/presentation/Filter/screens/Filteration/FilterationScreen.dart';
-import 'package:hotels_booking_app/presentation/Filter/screens/home/home_screen.dart';
+import 'package:hotels_booking_app/presentation/Filter/screens/explore/explore_screen.dart';
+import 'package:hotels_booking_app/presentation/Filter/screens/home/home_explore_screen.dart';
+import 'package:hotels_booking_app/presentation/Filter/screens/map/map_screen.dart';
+
 
 import 'package:hotels_booking_app/presentation/Filter/screens/searchHotels/SearchScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -12,15 +15,31 @@ import 'busieness_logic/FilterCubit/cubit.dart';
 import 'injection/injection.dart';
 
 void main() {
-  SharedPreferences.setMockInitialValues({});
-  WidgetsFlutterBinding.ensureInitialized();
+  //SharedPreferences.setMockInitialValues({});
+ // WidgetsFlutterBinding.ensureInitialized();
   initGetIt();
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+
   const MyApp({Key? key}) : super(key: key);
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
+  late AnimationController controller;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    controller = AnimationController(
+      vsync: this, // the SingleTickerProviderStateMixin
+      duration: Duration(seconds: 5),
+    );
+  }
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -42,7 +61,10 @@ class MyApp extends StatelessWidget {
             primarySwatch: Colors.blue,
           ),
           home:
-          home_screen());
+          // HomeExploreScreen( animationController: this.controller,),
+          MapScreen(),
+
+    );
 
     }
     )
