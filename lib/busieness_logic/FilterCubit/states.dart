@@ -1,6 +1,7 @@
-import 'package:hotels_booking_app/data/models/Filter/Get%20facilities/facilitiesData_model.dart';
-import 'package:hotels_booking_app/data/models/Filter/Get%20facilities/facilities_model.dart';
-import 'package:hotels_booking_app/data/models/Filter/Search/hotelsSearch_model.dart';
+
+
+import '../../data/Filter/models/Filter/Get facilities/facilities_model.dart';
+import '../../data/Filter/models/Filter/Search/hotelsSearch_model.dart';
 
 abstract class Filterstates {}
 class initialhotelstate extends Filterstates{}

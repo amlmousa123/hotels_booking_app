@@ -5,9 +5,11 @@ import 'package:hotels_booking_app/busieness_logic/FilterCubit/cubit.dart';
 import 'package:hotels_booking_app/busieness_logic/FilterCubit/states.dart';
 
 import 'package:syncfusion_flutter_sliders/sliders.dart';
-import 'package:hotels_booking_app/data/models/Filter/Search/hotelsSearch_model.dart';
 
-import '../../../../data/models/Filter/Get facilities/facilities_model.dart';
+
+import '../../../../data/Filter/models/Filter/Get facilities/facilities_model.dart';
+import '../../../../data/Filter/models/Filter/Search/hotelsSearch_model.dart';
+
 
 class FilterationScreen extends StatefulWidget {
   @override

@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../../busieness_logic/FilterCubit/cubit.dart';
 import '../../../../busieness_logic/FilterCubit/states.dart';
+import '../../widgets/common_search_bar.dart';
 import '../../widgets/hotelCardItem.dart';
 import '../../widgets/searchField.dart';
 import '../Filteration/FilterationScreen.dart';
@@ -83,7 +85,8 @@ class _explore_screenState extends State<explore_screen> {
                         children: [
                           Expanded(
                             flex: 5,
-                            child: SearchField(
+                            child:
+                            SearchField(
                               isenabled: false,
                                 // controller:
                                 //     BlocProvider.of<FilterCubit>(context)
@@ -94,6 +97,12 @@ class _explore_screenState extends State<explore_screen> {
                                 },
                                 hintText: "Search Hotels",
                                 prefixIcon: Icon(Icons.search)),
+                            // CommonSearchBar(
+                            //   iconData: FontAwesomeIcons.search,
+                            //   enabled: false,
+                            //   text: "Search Hotels",
+                            // height: 50,
+                            // ),
                           ),
                           Expanded(
                             child: MaterialButton(

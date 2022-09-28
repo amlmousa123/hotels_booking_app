@@ -1,6 +1,7 @@
 import 'dart:convert';
 
-import 'package:hotels_booking_app/data/models/Filter/Search/hotelsSearch_model.dart';
+
+import '../../models/Filter/Search/hotelsSearch_model.dart';
 import '../../web_services/FilterWebsevices/web_services.dart';
 
 import '../../models/Filter/Get facilities/facilities_model.dart';

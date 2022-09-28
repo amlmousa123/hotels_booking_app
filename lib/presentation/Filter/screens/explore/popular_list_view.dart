@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:hotels_booking_app/data/models/Filter/Search/hotelsSearch_model.dart';
+
 
 import '../../widgets/bottom_top_move_animation_view.dart';
 import 'category_view.dart';

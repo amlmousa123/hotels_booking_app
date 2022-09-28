@@ -2,11 +2,13 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:hotels_booking_app/busieness_logic/FilterCubit/states.dart';
-import 'package:hotels_booking_app/data/models/Filter/Search/hotelsSearch_model.dart';
+
 import 'package:hotels_booking_app/presentation/Filter/screens/searchHotels/SearchScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../data/models/Filter/Get facilities/facilities_model.dart';
-import '../../data/repository/FilterRepo/repository.dart';
+import '../../data/Filter/models/Filter/Get facilities/facilities_model.dart';
+import '../../data/Filter/models/Filter/Search/hotelsSearch_model.dart';
+import '../../data/Filter/repository/FilterRepo/repository.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 class FilterCubit extends Cubit<Filterstates> {

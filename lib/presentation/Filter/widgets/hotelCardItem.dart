@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:hotels_booking_app/data/models/Filter/Search/hotel.dart';
+
+
+import '../../../data/Filter/models/Filter/Search/hotel.dart';
 String baseurl="http://api.mahmoudtaha.com/images/";
 class HotelCardItem extends StatelessWidget {
   HotelCardItem({

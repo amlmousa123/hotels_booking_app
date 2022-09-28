@@ -15,7 +15,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import '../../../../busieness_logic/FilterCubit/cubit.dart';
 import '../../../../busieness_logic/FilterCubit/states.dart';
-import '../../../../data/models/Filter/Search/hotel.dart';
+
+import '../../../../data/Filter/models/Filter/Search/hotel.dart';
 import '../../../../modules/explore/home_explore_slider_view.dart';
 import '../../widgets/NoHotelsFound.dart';
 import '../../widgets/bottom_top_move_animation_view.dart';

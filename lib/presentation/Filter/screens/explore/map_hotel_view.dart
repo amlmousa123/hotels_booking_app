@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../../../../data/models/Filter/Search/hotel.dart';
+import '../../../../data/Filter/models/Filter/Search/hotel.dart';
+
 import '../../../../utils/text_styles.dart';
 import '../../../../utils/themes.dart';
 import '../../widgets/common_card.dart';
