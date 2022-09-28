@@ -1,7 +1,7 @@
-import 'package:hotels_booking_app/data/models/Booking/booking_%20model.dart';
-import 'package:hotels_booking_app/data/web_services/Booking/booking_webServices.dart';
 
-import '../../models/response_model.dart';
+import 'package:hotels_booking_app/data/Booking/models/booking_%20model.dart';
+import 'package:hotels_booking_app/data/Booking/models/response_model.dart';
+import 'package:hotels_booking_app/data/Booking/web_services/booking_webServices.dart';
 
 class BookingRepo {
   final BookingWebServices bookingWebServices;
