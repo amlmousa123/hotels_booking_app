@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
-import '../../../data/models/Booking/booking_ model.dart';
-import '../../../data/repository/Booking/booking_repo.dart';
+import 'package:hotels_booking_app/data/Booking/models/booking_%20model.dart';
+import 'package:hotels_booking_app/data/Booking/repository/booking_repo.dart';
+
 import 'booking_states.dart';
 
 class BookingCubit extends Cubit<BookingState> {

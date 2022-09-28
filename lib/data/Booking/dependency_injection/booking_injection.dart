@@ -1,8 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
-import 'package:hotels_booking_app/busieness_logic/Cubit/BookingCubit/booking_cubit.dart';
-import 'package:hotels_booking_app/data/repository/Booking/booking_repo.dart';
-import 'package:hotels_booking_app/data/web_services/Booking/booking_webServices.dart';
+import 'package:hotels_booking_app/busieness_logic/BookingCubit/booking_cubit.dart';
+import 'package:hotels_booking_app/data/Booking/repository/booking_repo.dart';
+import 'package:hotels_booking_app/data/Booking/web_services/booking_webServices.dart';
+
 
 final getIt = GetIt.instance;
 
