@@ -61,8 +61,8 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
             primarySwatch: Colors.blue,
           ),
           home:
-          // HomeExploreScreen( animationController: this.controller,),
-          MapScreen(),
+           //HomeExploreScreen( animationController: this.controller,),
+         MapScreen(),
 
     );
 
