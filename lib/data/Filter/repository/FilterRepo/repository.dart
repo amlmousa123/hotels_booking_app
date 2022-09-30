@@ -30,7 +30,7 @@ return response;
   var maxprice=null,
   var minprice=null,
   var facilities1=null,
-  var facilities2=null,
+
   var latitude=null,
   var longitude=null,
   var distance=null,
@@ -41,7 +41,7 @@ return response;
       )async{
 
     var response= await WebService.searchHotels(name,address,
-      maxprice,minprice,facilities1,facilities2,
+      maxprice,minprice,facilities1,
        latitude,longitude,distance,count,page
     );
    // jsonEncode(response);

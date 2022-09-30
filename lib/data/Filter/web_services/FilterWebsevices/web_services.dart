@@ -22,8 +22,9 @@ abstract class webServices{
        @Query("address") var address,
        @Query("max_price") var maxprice,
        @Query("min_price") var minprice,
+
        @Query("facilities[0]") var facilities1,
-       @Query("facilities[1]") var facilities2,
+
        @Query("latitude") var latitude,
        @Query("longitude") var longitude,
        @Query("distance") var distance,

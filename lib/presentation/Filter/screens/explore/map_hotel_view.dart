@@ -1,22 +1,130 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
+
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:hotels_booking_app/helpers/location_helper.dart';
+
+import 'package:geolocator/geolocator.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../../../../busieness_logic/FilterCubit/cubit.dart';
 import '../../../../data/Filter/models/Filter/Search/hotel.dart';
-
+import 'dart:math' as math;
+import '../../../../injection/injection.dart';
 import '../../../../utils/text_styles.dart';
 import '../../../../utils/themes.dart';
 import '../../widgets/common_card.dart';
 import '../../widgets/hotelCardItem.dart';
 
-class MapHotelListView extends StatelessWidget {
+class MapHotelListView extends StatefulWidget {
   final VoidCallback callback;
   final Hotel hotelData;
 
-  const MapHotelListView(
+  MapHotelListView(
       {Key? key, required this.hotelData, required this.callback})
       : super(key: key);
+
+  @override
+  State<MapHotelListView> createState() => _MapHotelListViewState();
+}
+
+class _MapHotelListViewState extends State<MapHotelListView> {
+  late Marker searchedPlaceMarker;
+  late Marker currentLocationMarker;
+  late CameraPosition goToSearchedForPlace;
+
+  var progressIndicator = false;
+  late List<LatLng> polylinePoints;
+  var isSearchedPlaceMarkerClicked = false;
+  var isTimeAndDistanceVisible = false;
+  Set<Marker> markers = Set();
+
+  void buildCameraNewPosition() {
+    goToSearchedForPlace = CameraPosition(
+      bearing: 0.0,
+      tilt: 0.0,
+      target: LatLng(
+        double.parse(widget.hotelData.latitude!),
+        double.parse(widget.hotelData.longitude!),
+      ),
+      zoom: 13,
+    );
+  }
+  void buildCurrentLocationMarker() {
+    currentLocationMarker = Marker(
+      position: LatLng(position!.latitude, position!.longitude),
+      markerId: MarkerId('2'),
+      onTap: () {},
+      infoWindow: InfoWindow(title: "Your current Location"),
+      icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
+    );
+    addMarkerToMarkersAndUpdateUI(currentLocationMarker);
+  }
+
+  void addMarkerToMarkersAndUpdateUI(Marker marker) {
+    setState(() {
+      markers.add(marker);
+    });
+  }
+  static Position? position;
+  Completer<GoogleMapController> _mapController = Completer();
+
+  static final CameraPosition _myCurrentLocationCameraPosition = CameraPosition(
+    bearing: 0.0,
+    target: LatLng(position!.latitude, position!.longitude),
+    tilt: 0.0,
+    zoom: 17,
+  );
+  Future<void> goToMySearchedForLocation() async {
+    buildCameraNewPosition();
+    final GoogleMapController controller = await _mapController.future;
+    controller
+        .animateCamera(CameraUpdate.newCameraPosition(goToSearchedForPlace));
+    buildSearchedPlaceMarker();
+  }
+
+  void buildSearchedPlaceMarker() {
+    searchedPlaceMarker = Marker(
+      position: goToSearchedForPlace.target,
+      markerId: MarkerId('1'),
+      onTap: () {
+        buildCurrentLocationMarker();
+        // show time and distance
+        setState(() {
+          isSearchedPlaceMarkerClicked = true;
+          isTimeAndDistanceVisible = true;
+        });
+      },
+      infoWindow: InfoWindow(title: "${widget.hotelData.description}"),
+      icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
+    );
+
+    addMarkerToMarkersAndUpdateUI(searchedPlaceMarker);
+  }
+
+  Future<void> _goToMyCurrentLocation() async {
+    final GoogleMapController controller = await _mapController.future;
+    controller.animateCamera(
+        CameraUpdate.newCameraPosition(_myCurrentLocationCameraPosition));
+  }
+@override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getMyCurrentLocation();
+  }
+  Future<void> getMyCurrentLocation() async {
+    position = await LocationHelper.getCurrentLocation().whenComplete(() {
+      setState(() {});
+    });
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -28,17 +136,17 @@ class MapHotelListView extends StatelessWidget {
         child: ClipRRect(
           borderRadius: BorderRadius.all(Radius.circular(16.0)),
           child: AspectRatio(
-            aspectRatio: 2.7,
+            aspectRatio: 3.0,
             child: Stack(
               children: <Widget>[
                 Row(
                   children: <Widget>[
                     AspectRatio(
                       aspectRatio: 0.90,
-                      child: Image.asset(
+                      child: Image.network(
                         baseurl+
-                            (hotelData
-                                .hotelImages![0].image)!,
+                            (widget.hotelData
+                                .hotelImages![math.Random().nextInt((widget.hotelData.hotelImages)!.length)].image)!,
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -50,23 +158,49 @@ class MapHotelListView extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             Text(
-                              hotelData.name!,
-                              maxLines: 2,
+                              widget.hotelData.name!,
+                              maxLines: 1,
                               textAlign: TextAlign.left,
                               style:
-                              TextStyles(context).getBoldStyle().copyWith(
+                              TextStyle( color: Colors.black,
                                 fontSize: 16,
                               ),
                               overflow: TextOverflow.ellipsis,
                             ),
-                            Text(
-                              hotelData.address!,
-                              style: TextStyles(context)
-                                  .getDescriptionStyle()
-                                  .copyWith(
-                                fontSize: 14,
-                              ),
+                            Row(
+                              crossAxisAlignment:
+                              CrossAxisAlignment.center,
+                              children: <Widget>[
+                                Icon(
+                                  FontAwesomeIcons.mapMarkerAlt,
+                                  size: 12,
+                                  color:
+                                  Theme.of(context).primaryColor,
+                                ),
+                                Text(
+                                  widget.hotelData.address!,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.clip,
+                                  textAlign: TextAlign.left,
+                                  style: TextStyles(context)
+                                      .getDescriptionStyle()
+                                      .copyWith(
+                                    fontSize: 3,
+                                  ),
+                                ),
+                                // Text(
+                                //   AppLocalizations(context)
+                                //       .of("km_to_city"),
+                                //   overflow: TextOverflow.ellipsis,
+                                //   style: TextStyles(context)
+                                //       .getDescriptionStyle()
+                                //       .copyWith(
+                                //     fontSize: 14,
+                                //   ),
+                                // ),
+                              ],
                             ),
+
                             Expanded(
                               child: SizedBox(),
                             ),
@@ -80,41 +214,41 @@ class MapHotelListView extends StatelessWidget {
                                     crossAxisAlignment:
                                     CrossAxisAlignment.start,
                                     children: <Widget>[
-                                      Row(
-                                        crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                        children: <Widget>[
-                                          Icon(
-                                            FontAwesomeIcons.mapMarkerAlt,
-                                            size: 12,
-                                            color:
-                                            Theme.of(context).primaryColor,
-                                          ),
-                                          Text(
-                                            " ${hotelData.description}",
-                                            overflow: TextOverflow.ellipsis,
-                                            style: TextStyles(context)
-                                                .getDescriptionStyle()
-                                                .copyWith(
-                                              fontSize: 14,
-                                            ),
-                                          ),
-                                          // Text(
-                                          //   AppLocalizations(context)
-                                          //       .of("km_to_city"),
-                                          //   overflow: TextOverflow.ellipsis,
-                                          //   style: TextStyles(context)
-                                          //       .getDescriptionStyle()
-                                          //       .copyWith(
-                                          //     fontSize: 14,
-                                          //   ),
-                                          // ),
-                                        ],
-                                      ),
+                                      // Row(
+                                      //   crossAxisAlignment:
+                                      //   CrossAxisAlignment.center,
+                                      //   children: <Widget>[
+                                      //     Icon(
+                                      //       FontAwesomeIcons.mapMarkerAlt,
+                                      //       size: 12,
+                                      //       color:
+                                      //       Theme.of(context).primaryColor,
+                                      //     ),
+                                      //     Text(
+                                      //       " ${hotelData.address}",
+                                      //       overflow: TextOverflow.ellipsis,
+                                      //       style: TextStyles(context)
+                                      //           .getDescriptionStyle()
+                                      //           .copyWith(
+                                      //         fontSize: 5,
+                                      //       ),
+                                      //     ),
+                                      //     // Text(
+                                      //     //   AppLocalizations(context)
+                                      //     //       .of("km_to_city"),
+                                      //     //   overflow: TextOverflow.ellipsis,
+                                      //     //   style: TextStyles(context)
+                                      //     //       .getDescriptionStyle()
+                                      //     //       .copyWith(
+                                      //     //     fontSize: 14,
+                                      //     //   ),
+                                      //     // ),
+                                      //   ],
+                                      // ),
                                       Padding(
                                         padding: const EdgeInsets.only(top: 4),
                                         child:  RatingBarIndicator(
-                                          rating: double.parse(hotelData.rate!),
+                                          rating: double.parse(widget.hotelData.rate!),
                                           itemBuilder: (context, index) => Icon(
                                             Icons.star,
                                             color: Colors.amber,
@@ -134,11 +268,9 @@ class MapHotelListView extends StatelessWidget {
                                     crossAxisAlignment: CrossAxisAlignment.end,
                                     children: <Widget>[
                                       Text(
-                                        "\$${hotelData.price}",
+                                        "\$${widget.hotelData.price}",
                                         textAlign: TextAlign.left,
-                                        style: TextStyles(context)
-                                            .getBoldStyle()
-                                            .copyWith(
+                                        style: const TextStyle(color: Colors.black,
                                           fontSize: 22,
                                         ),
                                       ),
@@ -168,7 +300,20 @@ class MapHotelListView extends StatelessWidget {
                     splashColor:
                     Theme.of(context).primaryColor.withOpacity(0.1),
                     onTap: () {
-                      callback();
+                    widget.hotelData.isSelected=true;
+
+                      print("helllllllllllo");
+                   //   widget.callback();
+                     // _goToMyCurrentLocation();
+                    getIt<FilterCubit>(). removeAllMarkersAndUpdateUI();
+                    getIt<FilterCubit>().isSearchedPlaceMarkerClicked=false;
+                    getIt<FilterCubit>().goToMySearchedForLocation(
+                      double.parse(widget.hotelData.latitude!),
+                        double.parse(widget.hotelData.longitude!),
+                        widget.hotelData.address!
+                    );
+
+                      //hereeeeeeeeeeeeeeeeeeeeeeeeeee
                     },
                   ),
                 ),

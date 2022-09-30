@@ -4,7 +4,15 @@ import '../../data/Filter/models/Filter/Get facilities/facilities_model.dart';
 import '../../data/Filter/models/Filter/Search/hotelsSearch_model.dart';
 
 abstract class Filterstates {}
+class addMarkerToMarkersAndUpdateUIstate extends Filterstates{}
+class buildSearchedPlaceMarkerstate extends Filterstates{}
+class getMyCurrentLocationstate extends Filterstates{}
+class removeAllMarkersAndUpdateUIstate extends Filterstates{}
 class initialhotelstate extends Filterstates{}
+class PlaceLocationLoaded extends Filterstates{
+
+
+}
 class getAllFacilitiesState extends Filterstates{
 
   final getFacilities facilities;

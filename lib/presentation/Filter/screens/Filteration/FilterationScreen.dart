@@ -61,25 +61,30 @@ getFacilities? allfacilties;
                                      choosenFacilities.add((allfacilties?.data![i].id)!);
                                    }
                                    }
-                                 if(choosenFacilities.length==2) {
-                                   BlocProvider.of<FilterCubit>(context).gethotelsbyFilter(
-                                       facility1:choosenFacilities[0], facility2:choosenFacilities[1],
-                                    pricevalues:  BlocProvider.of<FilterCubit>(context).pricevalues,selectedcity: BlocProvider.of<FilterCubit>(context).selectedAdresse);
-                                 }
-                                 else if(choosenFacilities.length==1)
-                                 {
-                                   BlocProvider.of<FilterCubit>(context).gethotelsbyFilter(
-                                       facility1:choosenFacilities[0],
-                                       pricevalues:  BlocProvider.of<FilterCubit>(context).pricevalues,
-                                       selectedcity:BlocProvider.of<FilterCubit>(context).selectedAdresse);
-                                 }
-                                 else {
-                                   BlocProvider.of<FilterCubit>(context).gethotelsbyFilter(
+                                 print("lllledddd${choosenFacilities.length}");
+                                  BlocProvider.of<FilterCubit>(context).gethotelsbyFilter(facs:choosenFacilities,
+                                    pricevalues:  BlocProvider.of<FilterCubit>(context).pricevalues,
+                                          selectedcity:BlocProvider.of<FilterCubit>(context).selectedAdresse);
 
-                                       pricevalues:  BlocProvider.of<FilterCubit>(context).pricevalues,
-                                       selectedcity:BlocProvider.of<FilterCubit>(context).selectedAdresse);
-                                 }
-
+                                 // if(choosenFacilities.length==2) {
+                                 //   BlocProvider.of<FilterCubit>(context).gethotelsbyFilter(
+                                 //       facility1:choosenFacilities[0], facility2:choosenFacilities[1],
+                                 //    pricevalues:  BlocProvider.of<FilterCubit>(context).pricevalues,selectedcity: BlocProvider.of<FilterCubit>(context).selectedAdresse);
+                                 // }
+                                 // else if(choosenFacilities.length==1)
+                                 // {
+                                 //   BlocProvider.of<FilterCubit>(context).gethotelsbyFilter(
+                                 //       facility1:choosenFacilities[0],
+                                 //       pricevalues:  BlocProvider.of<FilterCubit>(context).pricevalues,
+                                 //       selectedcity:BlocProvider.of<FilterCubit>(context).selectedAdresse);
+                                 // }
+                                 // else {
+                                 //   BlocProvider.of<FilterCubit>(context).gethotelsbyFilter(
+                                 //
+                                 //       pricevalues:  BlocProvider.of<FilterCubit>(context).pricevalues,
+                                 //       selectedcity:BlocProvider.of<FilterCubit>(context).selectedAdresse);
+                                 // }
+                                 //
 
                                   Navigator.pop(context);
                                 }, icon: Icon(Icons.clear)),
@@ -129,7 +134,7 @@ getFacilities? allfacilties;
 
                               enableIntervalSelection: true,
                               //shouldAlwaysShowTooltip: true,
-                              min: 50,
+                              min: 20,
                               max: 8000,
 
                               values:   BlocProvider.of<FilterCubit>(context).pricevalues,
