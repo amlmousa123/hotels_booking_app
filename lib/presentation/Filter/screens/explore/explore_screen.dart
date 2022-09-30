@@ -1,10 +1,15 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../../../../busieness_logic/FilterCubit/cubit.dart';
 import '../../../../busieness_logic/FilterCubit/states.dart';
+import '../../../../helpers/location_helper.dart';
 import '../../widgets/common_search_bar.dart';
 import '../../widgets/hotelCardItem.dart';
 import '../../widgets/searchField.dart';
@@ -18,11 +23,71 @@ class explore_screen extends StatefulWidget {
 }
 
 class _explore_screenState extends State<explore_screen> {
+  late Marker searchedPlaceMarker;
+  late Marker currentLocationMarker;
+  late CameraPosition goToSearchedForPlace;
+  void buildCurrentLocationMarker() {
+    currentLocationMarker = Marker(
+      position: LatLng(position!.latitude, position!.longitude),
+      markerId: MarkerId('2'),
+      onTap: () {},
+      infoWindow: InfoWindow(title: "Your current Location"),
+      icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
+    );
+    addMarkerToMarkersAndUpdateUI(currentLocationMarker);
+  }
+
+  void addMarkerToMarkersAndUpdateUI(Marker marker) {
+    setState(() {
+      markers.add(marker);
+    });
+  }
+  static Position? position;
+  Completer<GoogleMapController> _mapController = Completer();
+
+  static final CameraPosition _myCurrentLocationCameraPosition = CameraPosition(
+    bearing: 0.0,
+    target: LatLng(position!.latitude, position!.longitude),
+    tilt: 0.0,
+    zoom: 17,
+  );
+
+  // these variables for getPlaceLocation
+  Set<Marker> markers = Set();
+  Widget buildMap() {
+    return GoogleMap(
+      mapType: MapType.normal,
+      myLocationEnabled: true,
+      zoomControlsEnabled: false,
+      myLocationButtonEnabled: false,
+      markers: markers,
+      initialCameraPosition: _myCurrentLocationCameraPosition,
+      onMapCreated: (GoogleMapController controller) {
+        _mapController.complete(controller);
+      },
+      // polylines: placeDirections != null
+      //     ? {
+      //   Polyline(
+      //     polylineId: const PolylineId('my_polyline'),
+      //     color: Colors.black,
+      //     width: 2,
+      //     points: polylinePoints,
+      //   ),
+      // }
+      //     : {},
+    );
+  }
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    getMyCurrentLocation();
    // BlocProvider.of<FilterCubit>(context).getAllhotels();
+  }
+  Future<void> getMyCurrentLocation() async {
+    position = await LocationHelper.getCurrentLocation().whenComplete(() {
+      setState(() {});
+    });
   }
   @override
   Widget build(BuildContext context) {
@@ -176,6 +241,7 @@ class _explore_screenState extends State<explore_screen> {
                             });
                              } else return NoHotelsFound(message:'No Hotels Found',image: "assets/images/hotel.svg",);
                       })
+                         // buildMap(),
                     ])))));
   }
 }

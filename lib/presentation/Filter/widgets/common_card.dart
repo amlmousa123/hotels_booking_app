@@ -18,6 +18,7 @@ class _CommonCardState extends State<CommonCard> {
   @override
   Widget build(BuildContext context) {
     return Card(
+
       //   shadowColor: Theme.of(context).dividerColor,
       elevation: 4,
       color: widget.color,

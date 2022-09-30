@@ -1,6 +1,9 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:hotels_booking_app/busieness_logic/FilterCubit/states.dart';
 
 import 'package:hotels_booking_app/presentation/Filter/screens/searchHotels/SearchScreen.dart';
@@ -11,6 +14,8 @@ import '../../data/Filter/repository/FilterRepo/repository.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
+
+import '../../helpers/location_helper.dart';
 class FilterCubit extends Cubit<Filterstates> {
   SfRangeValues pricevalues = SfRangeValues(0.0, 6000);
  SharedPreferences? prefs;
@@ -19,7 +24,7 @@ class FilterCubit extends Cubit<Filterstates> {
   static bool isShowMap=false;
   final searchcontroller=TextEditingController();
    List<bool> isswitchedlist=[];
-  hotelsSearch allHotels=new hotelsSearch();
+ hotelsSearch allHotels=new hotelsSearch();
   static hotelsSearch FilteredHotels=new hotelsSearch();
   List adresses=['Not selected','rome','tanta'];
   String selectedAdresse='Not selected';
@@ -27,6 +32,125 @@ class FilterCubit extends Cubit<Filterstates> {
   MyRepo myrepo;
   getFacilities? facilities;
   static String? lastsearches=null;
+  static late Marker searchedPlaceMarker;
+  static late Marker currentLocationMarker;
+  late CameraPosition goToSearchedForPlace;
+
+  var progressIndicator = false;
+  late List<LatLng> polylinePoints;
+  var isSearchedPlaceMarkerClicked = false;
+  var isTimeAndDistanceVisible = false;
+  Set<Marker> markers = Set();
+  void removeAllMarkersAndUpdateUI() {
+print("koko");
+      markers.clear();
+    emit(removeAllMarkersAndUpdateUIstate());
+  }
+  void buildCameraNewPosition(double lat , double long) {
+    goToSearchedForPlace = CameraPosition(
+      bearing: 0.0,
+      tilt: 0.0,
+      target: LatLng(
+        lat,
+       long,
+      ),
+      zoom: 13,
+    );
+  }
+  void buildCurrentLocationMarker() {
+    currentLocationMarker = Marker(
+      position: LatLng(position!.latitude, position!.longitude),
+      markerId: MarkerId('2'),
+      onTap: () {},
+      infoWindow: InfoWindow(title: "Your current Location"),
+      icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
+    );
+    addMarkerToMarkersAndUpdateUI(currentLocationMarker);
+
+  }
+
+  void addMarkerToMarkersAndUpdateUI(Marker marker) {
+
+      markers.add(marker);
+     emit(addMarkerToMarkersAndUpdateUIstate()) ;
+
+  }
+  static Position? position;
+
+  Completer<GoogleMapController> mapController = Completer();
+
+  static final CameraPosition myCurrentLocationCameraPosition = CameraPosition(
+    bearing: 0.0,
+    target: LatLng(position!.latitude, position!.longitude),
+    tilt: 0.0,
+    zoom: 17,
+  );
+  Future<void> goToMySearchedForLocation(double lat , double lng,String descp) async {
+    markers.clear();
+    print("koky");
+    print("hiiiiiiiiiiiiiii23");
+    print(descp);
+    isSearchedPlaceMarkerClicked=false;
+    removeAllMarkersAndUpdateUI();
+    print(isSearchedPlaceMarkerClicked);
+    buildCameraNewPosition(lat,lng);
+    final GoogleMapController controller = await mapController.future;
+    controller
+        .animateCamera(CameraUpdate.newCameraPosition(goToSearchedForPlace)).then((vall){
+      buildCurrentLocationMarker();
+      buildSearchedPlaceMarker(descp);
+    });
+
+  }
+
+  void buildSearchedPlaceMarker(String descp) {
+    print("hiiiiiiiiiiiiiii23");
+    print(descp);
+    markers.clear();
+  //  isSearchedPlaceMarkerClicked = true;
+   // emit(buildSearchedPlaceMarkerstate());
+    searchedPlaceMarker = Marker(
+
+      position: goToSearchedForPlace.target,
+      markerId: MarkerId('1'),
+      onTap: () {
+
+        print("hiiiiiiiiiiiiiii");
+        print(isSearchedPlaceMarkerClicked);
+        isSearchedPlaceMarkerClicked = false;
+
+       // emit(buildSearchedPlaceMarkerstate());
+        print(isSearchedPlaceMarkerClicked);
+        buildCurrentLocationMarker();
+        // show time and distance
+  //emit(buildSearchedPlaceMarkerstate());
+
+        print("hiiiiiiiiiiiiiii22");
+        print(descp);
+       // emit(buildSearchedPlaceMarkerstate());
+      },
+
+      infoWindow: InfoWindow(title:
+
+      isSearchedPlaceMarkerClicked==false?
+      "${descp}":""
+      ),
+
+      icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
+    );
+    emit(buildSearchedPlaceMarkerstate());
+    addMarkerToMarkersAndUpdateUI(searchedPlaceMarker);
+  }
+  Future<void> getMyCurrentLocation() async {
+    position = await LocationHelper.getCurrentLocation().whenComplete(() {
+     emit(getMyCurrentLocationstate());
+    });
+  }
+  Future<void> goToMyCurrentLocation() async {
+    final GoogleMapController controller = await mapController.future;
+    controller.animateCamera(
+        CameraUpdate.newCameraPosition(myCurrentLocationCameraPosition));
+  }
   static savepref(String lastsearches)async{
     print("from savepref2");
     SharedPreferences prefs= await SharedPreferences.getInstance();
@@ -64,18 +188,27 @@ myrepo.getAllHotels().then((value) {
 
 
  }
+ void getSelectedPlaceLocation(){
+
+    emit(PlaceLocationLoaded());
+
+ }
  void loadSharedpref(String lastsearched)
  {
  // searchedhotels= lastsearched;
  }
- void gethotelsbyFilter({var facility1=null,var facility2=null, var pricevalues=null , String? selectedcity}){
+ void gethotelsbyFilter({List<int?>? facs,var pricevalues=null , String? selectedcity}){
  if(selectedcity=="Not selected") {
    selectedcity=null;
  }
+if(facs?.isEmpty==true)
+  emitGetsearchedHotels(maxprice: pricevalues.end,
+      minprice: pricevalues.start,address: selectedcity );
+  else {
 
-   emitGetsearchedHotels(facilities1:facility1,facilities2: facility2,maxprice: pricevalues.end,
-       minprice: pricevalues.start,address: selectedcity );
-
+  emitGetsearchedHotels(maxprice: pricevalues.end,
+      minprice: pricevalues.start,address: selectedcity,facilities1: facs );
+}
 
 
  }
@@ -137,8 +270,8 @@ myrepo.getAllHotels().then((value) {
       var address=null,
       var maxprice=null,
       var minprice=null,
-      var facilities1=null,
-      var facilities2=null,
+      var facilities1,
+
       var latitude=null,
       var longitude=null,
       var distance=null,
@@ -154,7 +287,7 @@ myrepo.getAllHotels().then((value) {
       maxprice:maxprice,
       minprice:minprice,
       facilities1:facilities1,
-      facilities2: facilities2,
+
       latitude:latitude,
       longitude:longitude,
       distance:distance,

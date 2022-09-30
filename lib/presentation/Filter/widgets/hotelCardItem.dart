@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
-
+import 'dart:math' as math;
 import '../../../data/Filter/models/Filter/Search/hotel.dart';
 String baseurl="http://api.mahmoudtaha.com/images/";
 class HotelCardItem extends StatelessWidget {
@@ -39,7 +39,7 @@ class HotelCardItem extends StatelessWidget {
 
                           baseurl+
                               (hotel
-                          .hotelImages![0].image)!
+                          .hotelImages![math.Random().nextInt((hotel.hotelImages)!.length)].image)!
 
                       , fit: BoxFit.cover,
                     ):
