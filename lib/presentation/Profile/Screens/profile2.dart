@@ -18,7 +18,7 @@ class _profile2State extends State<profile2> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    BlocProvider.of<ProfileCubit>(context).getprofileinfo("dHlbidFF9j1tptoFhvFM8VlQzqrW428SwVULIoqwvSwamZJ1B0csMMr13xvT");
+
   }
 
   final ImagePicker _picker = ImagePicker();

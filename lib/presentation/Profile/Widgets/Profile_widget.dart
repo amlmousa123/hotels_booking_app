@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../busieness_logic/ProfileCubit/cubit.dart';
 import '../../Filter/screens/home/home_explore_screen.dart';
 import '../screens/profile2.dart';
 import '../../../constants/strings.dart';
@@ -11,13 +13,20 @@ class Profile_Widget extends StatefulWidget {
 }
 
 class _Profile_WidgetState extends State<Profile_Widget> {
+
   int _selectedIndex = 0;
   static  TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
 
-
+@override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    BlocProvider.of<ProfileCubit>(context).getprofileinfo("dHlbidFF9j1tptoFhvFM8VlQzqrW428SwVULIoqwvSwamZJ1B0csMMr13xvT");
+  }
   @override
   Widget build(BuildContext context) {
+
       List<Widget> _widgetOptions = <Widget>[
       HomeExploreScreen( animationController: controller,),
       Text(
