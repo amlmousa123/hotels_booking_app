@@ -9,26 +9,24 @@ import '../../../data/Filter/models/Filter/Search/hotel.dart';
 import '../../../injection/injection.dart';
 import '../../../utils/text_styles.dart';
 import '../../../utils/themes.dart';
+import '../../Booking/screens/booking_screen.dart';
 import 'common_card.dart';
-String baseurl="http://api.mahmoudtaha.com/images/";
+
+String baseurl = "http://api.mahmoudtaha.com/images/";
+
 class HotelCardItem extends StatelessWidget {
-  HotelCardItem({
-    Key?key,
-
-
-    required this.hotel
-
-
-  }):super(key:key);
+  HotelCardItem({Key? key, required this.hotel}) : super(key: key);
 
   final Hotel hotel;
 //  final void Function(String)? onchanged;
   @override
   Widget build(BuildContext context) {
-
-    return
-      CommonCard(
-
+    return InkWell(
+      onTap: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => HotelDetailes(hotelData: hotel))),
+      child: CommonCard(
         color: AppTheme.scaffoldBackgroundColor,
         radius: 16,
         child: ClipRRect(
@@ -42,9 +40,11 @@ class HotelCardItem extends StatelessWidget {
                     AspectRatio(
                       aspectRatio: 0.90,
                       child: ExtendedImage.network(
-                        baseurl+
+                        baseurl +
                             (hotel
-                                .hotelImages![math.Random().nextInt((hotel.hotelImages)!.length)].image)!,
+                                .hotelImages![math.Random()
+                                    .nextInt((hotel.hotelImages)!.length)]
+                                .image)!,
                         cache: true,
                         fit: BoxFit.cover,
                       ),
@@ -57,24 +57,22 @@ class HotelCardItem extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             Text(
-                             hotel.name!,
+                              hotel.name!,
                               maxLines: 1,
                               textAlign: TextAlign.left,
-                              style:
-                              TextStyle( color: Colors.black,
+                              style: TextStyle(
+                                color: Colors.black,
                                 fontSize: 16,
                               ),
                               overflow: TextOverflow.ellipsis,
                             ),
                             Row(
-                              crossAxisAlignment:
-                              CrossAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: <Widget>[
                                 Icon(
                                   FontAwesomeIcons.mapMarkerAlt,
                                   size: 12,
-                                  color:
-                                  Theme.of(context).primaryColor,
+                                  color: Theme.of(context).primaryColor,
                                 ),
                                 Expanded(
                                   child: Text(
@@ -85,8 +83,8 @@ class HotelCardItem extends StatelessWidget {
                                     style: TextStyles(context)
                                         .getDescriptionStyle()
                                         .copyWith(
-                                      fontSize: 14,
-                                    ),
+                                          fontSize: 14,
+                                        ),
                                   ),
                                 ),
                                 // Text(
@@ -101,7 +99,6 @@ class HotelCardItem extends StatelessWidget {
                                 // ),
                               ],
                             ),
-
                             Expanded(
                               child: SizedBox(),
                             ),
@@ -113,18 +110,25 @@ class HotelCardItem extends StatelessWidget {
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     crossAxisAlignment:
-                                    CrossAxisAlignment.start,
+                                        CrossAxisAlignment.start,
                                     children: <Widget>[
                                       Row(
                                         children: [
-
-                                          Text(hotel.rate!,style:TextStyle(color: Colors.amber),),
-                                          Icon(Icons.star,size: 15,color: Colors.amber,),
+                                          Text(
+                                            hotel.rate!,
+                                            style:
+                                                TextStyle(color: Colors.amber),
+                                          ),
+                                          Icon(
+                                            Icons.star,
+                                            size: 15,
+                                            color: Colors.amber,
+                                          ),
                                         ],
                                       ),
                                       Padding(
                                         padding: const EdgeInsets.only(top: 4),
-                                        child:  RatingBarIndicator(
+                                        child: RatingBarIndicator(
                                           rating: double.parse(hotel.rate!),
                                           itemBuilder: (context, index) => Icon(
                                             Icons.star,
@@ -147,7 +151,8 @@ class HotelCardItem extends StatelessWidget {
                                       Text(
                                         "\$${hotel.price}",
                                         textAlign: TextAlign.left,
-                                        style: const TextStyle(color: Colors.black,
+                                        style: const TextStyle(
+                                          color: Colors.black,
                                           fontSize: 22,
                                         ),
                                       ),
@@ -156,8 +161,8 @@ class HotelCardItem extends StatelessWidget {
                                         style: TextStyles(context)
                                             .getDescriptionStyle()
                                             .copyWith(
-                                          fontSize: 9,
-                                        ),
+                                              fontSize: 9,
+                                            ),
                                       ),
                                     ],
                                   ),
@@ -175,10 +180,8 @@ class HotelCardItem extends StatelessWidget {
                   child: InkWell(
                     highlightColor: Colors.transparent,
                     splashColor:
-                    Theme.of(context).primaryColor.withOpacity(0.1),
+                        Theme.of(context).primaryColor.withOpacity(0.1),
                     onTap: () {
-
-
                       //hereeeeeeeeeeeeeeeeeeeeeeeeeee
                     },
                   ),
@@ -187,6 +190,7 @@ class HotelCardItem extends StatelessWidget {
             ),
           ),
         ),
-      );
+      ),
+    );
   }
 }

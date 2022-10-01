@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../busieness_logic/ProfileCubit/cubit.dart';
+import '../../Booking/screens/trips_screen.dart';
 import '../../Filter/screens/home/home_explore_screen.dart';
 import '../screens/profile2.dart';
 import '../../../constants/strings.dart';
@@ -29,10 +30,7 @@ class _Profile_WidgetState extends State<Profile_Widget> {
 
       List<Widget> _widgetOptions = <Widget>[
       HomeExploreScreen( animationController: controller,),
-      Text(
-        'Trips',
-        style: optionStyle,
-      ),
+      TripsScreen(),
       profile2(),
     ];
 
