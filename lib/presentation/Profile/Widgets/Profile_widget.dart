@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../Booking/screens/trips_screen.dart';
 import '../screens/profile2.dart';
 
 class Profile_Widget extends StatefulWidget {
@@ -13,16 +14,13 @@ class _Profile_WidgetState extends State<Profile_Widget> {
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static  List<Widget> _widgetOptions = <Widget>[
+  static List<Widget> _widgetOptions = <Widget>[
     Text(
       'Explore',
       style: optionStyle,
     ),
-    Text(
-      'Trips',
-      style: optionStyle,
-    ),
-  profile2(),
+    TripsScreen(),
+    profile2(),
   ];
 
   void _onItemTapped(int index) {
@@ -36,7 +34,6 @@ class _Profile_WidgetState extends State<Profile_Widget> {
     return Scaffold(
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
-
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
