@@ -6,6 +6,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hotels_booking_app/busieness_logic/BookingCubit/booking_cubit.dart';
+import 'package:hotels_booking_app/busieness_logic/BookingCubit/booking_states.dart';
+import 'package:hotels_booking_app/data/Booking/models/response_model.dart';
 import 'package:hotels_booking_app/presentation/Booking/widgets/trips_list.dart';
 
 import '../../../constants/colors.dart';
@@ -174,12 +176,19 @@ class _HotelDetailesState extends State<HotelDetailes>
                   padding: const EdgeInsets.only(
                       left: 16, right: 16, bottom: 16, top: 16),
                   child: CommonButton(
-                    backgroundColor: MyColors.myGreen,
-                    buttonText: "book now",
-                    onTap: () {
+                      backgroundColor: MyColors.myGreen,
+                      buttonText: "book now",
+                      onTap: () {
+                        BlocListener(
+                            listener: (context,state){
+                          if (state is BookingCreated){
+                            StatusResponse response = state .response;
+                            print(response);
+                          }
+                        },);
+                      },
+                    ),
 
-                    },
-                  ),
                 ),
 
                 SizedBox(
