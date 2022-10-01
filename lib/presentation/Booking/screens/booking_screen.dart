@@ -19,12 +19,12 @@ class HotelDetailes extends StatefulWidget {
   final Hotel hotelData;
   const HotelDetailes({Key? key, required this.hotelData}) : super(key: key);
   @override
-  _HotelDetailesState createState() => _HotelDetailesState(hotelData);
+  _HotelDetailesState createState() => _HotelDetailesState();
 }
 
 class _HotelDetailesState extends State<HotelDetailes>
     with TickerProviderStateMixin {
-  final Hotel hotelData;
+
   ScrollController scrollController = ScrollController(initialScrollOffset: 0);
   var hoteltext1 =
       "Featuring a fitness center, Grand Royale Park Hote is located in Sweden, 4.7 km frome National Museum...";
@@ -35,7 +35,6 @@ class _HotelDetailesState extends State<HotelDetailes>
   var imageHieght = 0.0;
   late AnimationController _animationController;
 
-  _HotelDetailesState(this.hotelData);
 
   @override
   void initState() {
@@ -150,7 +149,7 @@ class _HotelDetailesState extends State<HotelDetailes>
                   ),
                   // overall rating view
                   child: RatingBarIndicator(
-                    rating: double.parse(hotelData.rate.toString()),
+                    rating: double.parse(widget.hotelData.rate.toString()),
                     itemBuilder: (context, index) => Icon(
                       Icons.star,
                       color: MyColors.myGreen,
@@ -190,7 +189,7 @@ class _HotelDetailesState extends State<HotelDetailes>
           ),
 
           // backgrouund image and Hotel name and thier details and more details animation view
-          _backgraoundImageUI(hotelData),
+          //_backgraoundImageUI(hotelData),
 
           // Arrow back Ui
           Padding(
@@ -488,7 +487,7 @@ class _HotelDetailesState extends State<HotelDetailes>
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(
-                hotelData.name.toString(),
+                widget.hotelData.name.toString(),
                 //  widget.hotelData.titleTxt,
                 textAlign: TextAlign.left,
                 style: TextStyle(
@@ -502,7 +501,7 @@ class _HotelDetailesState extends State<HotelDetailes>
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    hotelData.address.toString(),
+                    widget.hotelData.address.toString(),
                     //widget.hotelData.subTxt,
                     style: TextStyles(context).getRegularStyle().copyWith(
                           fontSize: 14,
@@ -574,7 +573,7 @@ class _HotelDetailesState extends State<HotelDetailes>
           crossAxisAlignment: CrossAxisAlignment.end,
           children: <Widget>[
             Text(
-              hotelData.price.toString(),
+              widget.hotelData.price.toString(),
               // "\$${widget.hotelData.perNight}",
               textAlign: TextAlign.left,
               style: TextStyles(context).getBoldStyle().copyWith(
