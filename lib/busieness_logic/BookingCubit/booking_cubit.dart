@@ -27,6 +27,8 @@ class BookingCubit extends Cubit<BookingState> {
       emit(BookingLoaded(booking));
       this.booking = booking;
     });
+    print(booking.data);
     return booking;
+
   }
 }

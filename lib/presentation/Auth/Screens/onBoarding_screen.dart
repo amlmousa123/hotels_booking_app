@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hotels_booking_app/presentation/Auth/Widgets/onBoarding/onBoarding_widget.dart';
 
 
 class OnBoardingScreen extends StatelessWidget {
@@ -6,6 +7,6 @@ class OnBoardingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return OnBoardingScreen();
+    return OnBoardingWidget();
   }
 }

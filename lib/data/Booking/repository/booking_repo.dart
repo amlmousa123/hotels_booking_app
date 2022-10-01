@@ -11,7 +11,7 @@ class BookingRepo {
   Future<StatusResponse> createBooking(int hotelId) async {
     return await bookingWebServices.createBooking(
         token:
-            'Bearer DnkaEA2eU1DNZmKIpx5I7u6ptaKeEGAA1nq4bFkClgBsYsWLyTMNsJD7O06u',
+            '4JW2g2z2RjKCnBFEGY42VqphuNuhzw8y9jbhwU73ypb6RbN2If26kMnyQM0P',
         hotelId: hotelId);
   }
 
@@ -25,7 +25,7 @@ class BookingRepo {
     return await bookingWebServices.getMyBooking(
       bookingType,
       count,
-      'Bearer DnkaEA2eU1DNZmKIpx5I7u6ptaKeEGAA1nq4bFkClgBsYsWLyTMNsJD7O06u',
+      '4JW2g2z2RjKCnBFEGY42VqphuNuhzw8y9jbhwU73ypb6RbN2If26kMnyQM0P',
     );
   }
 }

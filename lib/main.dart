@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hotels_booking_app/busieness_logic/BookingCubit/booking_cubit.dart';
 import 'package:hotels_booking_app/busieness_logic/FilterCubit/states.dart';
 import 'package:hotels_booking_app/data/Auth/web_services/dio_helper.dart';
 import 'package:hotels_booking_app/presentation/Auth/Widgets/onBoarding/onBoarding_widget.dart';
@@ -58,7 +59,10 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
           ),
           BlocProvider(
             create: (BuildContext context) => ProfileCubit(getIt<ProfileRebo>(),getIt<UpdateRebo>()),
-          )
+          ),
+          BlocProvider(
+              create:(context)=>getIt<BookingCubit>()
+          ),
         ],
         child: BlocBuilder<FilterCubit,Filterstates>(
 
