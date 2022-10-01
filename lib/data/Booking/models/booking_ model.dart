@@ -1,4 +1,8 @@
 
+import 'package:hotels_booking_app/data/Filter/models/Filter/Search/hotel.dart';
+
+import '../../Filter/models/Filter/Search/Link_model.dart';
+
 class Booking {
   Booking({
     required this.status,
@@ -45,7 +49,7 @@ class BookingDataModel {
     required this.from,
     required this.lastPage,
     required this.lastPageUrl,
-    //required this.links,
+    required this.links,
     this.nextPageUrl,
     required this.path,
     required this.perPage,
@@ -59,7 +63,7 @@ class BookingDataModel {
   late final int from;
   late final int lastPage;
   late final String lastPageUrl;
- // late final List<Link> links;
+  late final List<Link> links;
   late final Null nextPageUrl;
   late final String path;
   late final String perPage;
@@ -74,7 +78,7 @@ class BookingDataModel {
     from = json['from'];
     lastPage = json['last_page'];
     lastPageUrl = json['last_page_url'];
-   // links = List.from(json['links']).map((e)=>Link.fromJson(e)).toList();
+    links = List.from(json['links']).map((e)=>Link.fromJson(e)).toList();
     nextPageUrl = null;
     path = json['path'];
     perPage = json['per_page'];
@@ -91,7 +95,7 @@ class BookingDataModel {
     _data['from'] = from;
     _data['last_page'] = lastPage;
     _data['last_page_url'] = lastPageUrl;
-   // _data['links'] = links.map((e)=>e.toJson()).toList();
+    _data['links'] = links.map((e)=>e.toJson()).toList();
     _data['next_page_url'] = nextPageUrl;
     _data['path'] = path;
     _data['per_page'] = perPage;
@@ -110,7 +114,7 @@ class BookingData {
     required this.createdAt,
     required this.updatedAt,
    // required this.user,
-    //required this.hotel,
+    required this.hotel,
   });
   late final int id;
   late final String userId;
@@ -119,7 +123,7 @@ class BookingData {
   late final String createdAt;
   late final String updatedAt;
 //  late final userData user;
- // late final Hotel hotel;
+  late final Hotel hotel;
 
   BookingData.fromJson(Map<String, dynamic> json){
     id = json['id'];
@@ -129,7 +133,7 @@ class BookingData {
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
    // user = userData.fromJson(json['user']);
-    //hotel = Hotel.fromJson(json['hotel']);
+    hotel = Hotel.fromJson(json['hotel']);
   }
 
   Map<String, dynamic> toJson() {
@@ -141,7 +145,7 @@ class BookingData {
     _data['created_at'] = createdAt;
     _data['updated_at'] = updatedAt;
    // _data['user'] = user.toJson();
-   // _data['hotel'] = hotel.toJson();
+    _data['hotel'] = hotel.toJson();
     return _data;
   }
 }
