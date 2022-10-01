@@ -35,8 +35,8 @@ class _profile2State extends State<profile2> {
                 Column(
                   children: [
                     Text(
-                     ( BlocProvider.of<ProfileCubit>(context).profile_info.data?.name)!,
-                      style: TextStyle(
+                     ( BlocProvider.of<ProfileCubit>(context).profile_info?.data?.name)!,
+                      style: const TextStyle(
                           color: Colors.white,
                           fontSize: 24,
                           fontWeight: FontWeight.bold),
@@ -47,7 +47,7 @@ class _profile2State extends State<profile2> {
                         MaterialPageRoute(
                             builder: (context) => EditProfile()),
                       );
-                    }, child: Text("View and Edit Profile",
+                    }, child: const Text("View and Edit Profile",
                           style: TextStyle(color: Colors.grey, fontSize: 16)),)
 
                   ],
@@ -62,20 +62,20 @@ class _profile2State extends State<profile2> {
                   },
                   child: CircleAvatar(
                     backgroundImage: NetworkImage(
-                      (  BlocProvider.of<ProfileCubit>(context).profile_info.data?.image)!
+                      (  BlocProvider.of<ProfileCubit>(context).profile_info?.data?.image)!
                     ),
                     radius: 40,
                   ),
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
-                children: [
+                children: const [
                   Text(
                     "Change Password",
                     style: TextStyle(fontSize: 20, color: Colors.white),
@@ -88,14 +88,14 @@ class _profile2State extends State<profile2> {
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 6,
             ),
             Divider(thickness: 0.5, color: Colors.grey),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
-                children: [
+                children: const [
                   Text(
                     "Invite Friends",
                     style: TextStyle(fontSize: 20, color: Colors.white),
@@ -115,7 +115,7 @@ class _profile2State extends State<profile2> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
-                children: [
+                children: const [
                   Text(
                     "Crdit & Coupons",
                     style: TextStyle(fontSize: 20, color: Colors.white),
@@ -128,14 +128,14 @@ class _profile2State extends State<profile2> {
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 6,
             ),
             Divider(thickness: 0.5, color: Colors.grey),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
-                children: [
+                children: const [
                   Text(
                     "Help Center",
                     style: TextStyle(fontSize: 20, color: Colors.white),
@@ -148,14 +148,14 @@ class _profile2State extends State<profile2> {
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 6,
             ),
             Divider(thickness: 0.5, color: Colors.grey),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
-                children: [
+                children: const [
                   Text(
                     "Payment",
                     style: TextStyle(fontSize: 20, color: Colors.white),
@@ -168,14 +168,14 @@ class _profile2State extends State<profile2> {
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 6,
             ),
             Divider(thickness: 0.5, color: Colors.grey),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
-                children: [
+                children: const [
                   Text(
                     "Setting",
                     style: TextStyle(fontSize: 20, color: Colors.white),

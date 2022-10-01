@@ -63,6 +63,7 @@ dependencies:
   smooth_page_indicator: ^1.0.0+2
   google_maps_flutter:
   geolocator: ^9.0.2
+  extended_image: ^6.1.0
 
 
 dev_dependencies:

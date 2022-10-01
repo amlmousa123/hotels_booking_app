@@ -1,3 +1,4 @@
+import 'package:extended_image/extended_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -27,6 +28,7 @@ class HotelCardItem extends StatelessWidget {
 
     return
       CommonCard(
+
         color: AppTheme.scaffoldBackgroundColor,
         radius: 16,
         child: ClipRRect(
@@ -39,10 +41,11 @@ class HotelCardItem extends StatelessWidget {
                   children: <Widget>[
                     AspectRatio(
                       aspectRatio: 0.90,
-                      child: Image.network(
+                      child: ExtendedImage.network(
                         baseurl+
                             (hotel
                                 .hotelImages![math.Random().nextInt((hotel.hotelImages)!.length)].image)!,
+                        cache: true,
                         fit: BoxFit.cover,
                       ),
                     ),

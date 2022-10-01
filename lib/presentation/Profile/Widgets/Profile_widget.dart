@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../../Filter/screens/home/home_explore_screen.dart';
 import '../screens/profile2.dart';
-
+import '../../../constants/strings.dart';
 class Profile_Widget extends StatefulWidget {
   const Profile_Widget({Key? key}) : super(key: key);
 
@@ -11,28 +12,27 @@ class Profile_Widget extends StatefulWidget {
 
 class _Profile_WidgetState extends State<Profile_Widget> {
   int _selectedIndex = 0;
-  static const TextStyle optionStyle =
+  static  TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static  List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Explore',
-      style: optionStyle,
-    ),
-    Text(
-      'Trips',
-      style: optionStyle,
-    ),
-  profile2(),
-  ];
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
+      List<Widget> _widgetOptions = <Widget>[
+      HomeExploreScreen( animationController: controller,),
+      Text(
+        'Trips',
+        style: optionStyle,
+      ),
+      profile2(),
+    ];
+
+    void _onItemTapped(int index) {
+      setState(() {
+        _selectedIndex = index;
+        print("selected index$index");
+      });
+    }
     return Scaffold(
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),

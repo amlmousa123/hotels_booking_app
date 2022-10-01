@@ -27,6 +27,7 @@ import '../explore/explore_map&all.dart';
 import '../explore/explore_screen.dart';
 import '../explore/hotel_list_view_page.dart';
 import '../explore/title_view.dart';
+import '../searchHotels/SearchScreen.dart';
 
 class HomeExploreScreen extends StatefulWidget {
   final AnimationController animationController;
@@ -85,6 +86,7 @@ class _HomeExploreScreenState extends State<HomeExploreScreen>
   Widget build(BuildContext context) {
     sliderImageHieght = MediaQuery.of(context).size.width * 1.3;
     return Scaffold(
+      key:UniqueKey(),
       backgroundColor: Colors.white,
       body: BottomTopMoveAnimationView(
         animationController: widget.animationController,
@@ -302,7 +304,11 @@ class _HomeExploreScreenState extends State<HomeExploreScreen>
         child: InkWell(
           borderRadius: BorderRadius.all(Radius.circular(38)),
           onTap: () {
-            Scaffold();
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => searchScreen()),
+            );
           },
           child: const CommonSearchBar(
             iconData: FontAwesomeIcons.search,
