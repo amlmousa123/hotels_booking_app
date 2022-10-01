@@ -16,7 +16,7 @@ class ProfileCubit extends Cubit<ProfileState> {
   late ImagePicker picker = ImagePicker();
   XFile? image;
 
-  late Profile_info profile_info;
+  Profile_info? profile_info;
 
   ProfileCubit(this.profileRebo, this.updateRebo) : super(ProfileInitial());
 
@@ -27,13 +27,14 @@ class ProfileCubit extends Cubit<ProfileState> {
     });
   }
 
-  Profile_info getprofileinfo(String token) {
+  Profile_info? getprofileinfo(String token) {
     profileRebo.getProfileInfo(token).then((profile) {
 
       this.profile_info = profile;
       emit(ProfileInfoLoaded(profile));
+      return profile_info;
     });
-    return profile_info;
+   return profile_info;
   }
 
 

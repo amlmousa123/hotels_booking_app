@@ -49,7 +49,7 @@ class _EditProfileState extends State<EditProfile> {
               style: TextStyle(
                   fontSize: 25,
                   fontWeight: FontWeight.bold,
-                  color: Colors.white),
+                  color: Colors.black),
             ),
             Center(
               child: Stack(
@@ -77,7 +77,7 @@ class _EditProfileState extends State<EditProfile> {
                               image:
 
                               NetworkImage(
-                                  (  BlocProvider.of<ProfileCubit>(context).profile_info.data?.image)!),
+                                  (  BlocProvider.of<ProfileCubit>(context).profile_info?.data?.image)!),
                             ))),
                     onTap: ()async{
                       BlocProvider.of<ProfileCubit>(context).pickImage();

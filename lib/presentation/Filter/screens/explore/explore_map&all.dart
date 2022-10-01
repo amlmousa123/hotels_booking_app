@@ -97,6 +97,7 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+     // key: UniqueKey(),
       body: Stack(
         children: <Widget>[
           RemoveFocuse(
