@@ -127,20 +127,29 @@ class _explore_screenState extends State<explore_screen> {
                           BlocBuilder<FilterCubit,Filterstates>(
                               builder: (context, state) {
                                 if (FilterCubit.isShowMap == false) {
-                                  return IconButton(icon: Icon(
+                                  return IconButton(
+                                    padding: EdgeInsets.zero,
+                                    constraints: BoxConstraints(),
+                                    icon: Icon(
+
                                       Icons.map_outlined), onPressed: () {
                                     FilterCubit.get(context).showMap(true);
                                   },);
                                 }
                                 else {
-                                  return IconButton(icon: const Icon(
+                                  return IconButton(
+                                    padding: EdgeInsets.zero,
+                                    constraints: BoxConstraints(),
+                                    icon: const Icon(
                                       Icons.format_list_bulleted_outlined),
                                     onPressed: () {
                                       FilterCubit.get(context).showMap(false);
                                     },
                                   );
                                 }
-                              } )],
+                              } )
+
+                        ],
                       ),
                       SizedBox(
                         height: 15,

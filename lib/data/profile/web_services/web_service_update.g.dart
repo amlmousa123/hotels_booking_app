@@ -24,7 +24,9 @@ class _WebServiceUpdate implements WebServiceUpdate {
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'token': token};
     _headers.removeWhere((k, v) => v == null);
-    final _data = {'name': name, 'email': email, 'image': image};
+    final _data = {'name': name, 'email': email, 'image': await Uri.file(image.path).pathSegments.last
+
+    };
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<Update_response>(
             Options(method: 'POST', headers: _headers, extra: _extra)

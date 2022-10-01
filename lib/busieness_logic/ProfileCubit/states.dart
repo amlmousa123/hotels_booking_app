@@ -14,6 +14,7 @@ class ProfileInfoLoaded extends ProfileState{
 
 
 }
+class PickImageSuccessState extends ProfileState{}
 
 class ProfileUpdate extends ProfileState{
   final Update_response update_response;

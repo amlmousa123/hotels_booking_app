@@ -1,15 +1,33 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 
+import '../../../busieness_logic/ProfileCubit/cubit.dart';
 import '../Widgets/Edit_Profile_widget.dart';
 
-class profile2 extends StatelessWidget {
-  const profile2({Key? key}) : super(key: key);
+class profile2 extends StatefulWidget {
+  profile2({Key? key}) : super(key: key);
+
+  @override
+  State<profile2> createState() => _profile2State();
+}
+
+class _profile2State extends State<profile2> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    BlocProvider.of<ProfileCubit>(context).getprofileinfo("dHlbidFF9j1tptoFhvFM8VlQzqrW428SwVULIoqwvSwamZJ1B0csMMr13xvT");
+  }
+
+  final ImagePicker _picker = ImagePicker();
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Colors.black,
         body: Column(
           children: [
             Row(
@@ -17,7 +35,7 @@ class profile2 extends StatelessWidget {
                 Column(
                   children: [
                     Text(
-                      "Amanda",
+                     ( BlocProvider.of<ProfileCubit>(context).profile_info.data?.name)!,
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 24,
@@ -35,10 +53,19 @@ class profile2 extends StatelessWidget {
                   ],
                 ),
                 Spacer(),
-                CircleAvatar(
-                  backgroundImage: NetworkImage(
-                      'https://expertphotography.b-cdn.net/wp-content/uploads/2018/10/cool-profile-pictures-retouching-1.jpg'),
-                  radius: 40,
+
+
+                InkWell(
+                  onTap: ()async{
+                 //   BlocProvider.of<ProfileCubit>(context).image = (await _picker.pickImage(source: ImageSource.gallery))!;
+
+                  },
+                  child: CircleAvatar(
+                    backgroundImage: NetworkImage(
+                      (  BlocProvider.of<ProfileCubit>(context).profile_info.data?.image)!
+                    ),
+                    radius: 40,
+                  ),
                 ),
               ],
             ),
