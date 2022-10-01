@@ -55,7 +55,8 @@ class _webServices implements webServices {
       maxprice,
       minprice,
       facilities1,
-      facilities2,
+
+
       latitude,
       longitude,
       distance,
@@ -74,8 +75,8 @@ class _webServices implements webServices {
       else r'min_price': minprice,
       if( facilities1==null) Uri.decodeQueryComponent(r'facilities[0]'): {}
      else 'facilities[0]': facilities1,
-      if( facilities2==null) r'facilities[1]': {}
-     else r'facilities[1]': facilities2,
+
+
       if( latitude==null) r'latitude': {}
       else r'latitude': latitude,
       if( longitude==null) r'longitude': {}

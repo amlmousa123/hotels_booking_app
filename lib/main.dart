@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hotels_booking_app/busieness_logic/FilterCubit/states.dart';
-import 'package:hotels_booking_app/data/Filter/models/Filter/Search/hotel.dart';
-import 'package:hotels_booking_app/presentation/Booking/screens/booking_screen.dart';
-import 'package:hotels_booking_app/presentation/Booking/screens/trips_screen.dart';
 import 'package:hotels_booking_app/presentation/Filter/screens/Filteration/FilterationScreen.dart';
 import 'package:hotels_booking_app/presentation/Filter/screens/explore/explore_screen.dart';
 import 'package:hotels_booking_app/presentation/Filter/screens/home/home_explore_screen.dart';
@@ -20,28 +17,11 @@ import 'injection/injection.dart';
 void main() {
   //SharedPreferences.setMockInitialValues({});
  // WidgetsFlutterBinding.ensureInitialized();
-  //initGetIt();
+  initGetIt();
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      debugShowCheckedModeBanner: false,
-      home: HotelDetailes(hotelData: Hotel(),),
-
-
-    );
-  }
-}
-/*class MyApp extends StatefulWidget {
+class MyApp extends StatefulWidget {
 
   const MyApp({Key? key}) : super(key: key);
 
@@ -81,8 +61,7 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
             primarySwatch: Colors.blue,
           ),
           home:
-          TripsScreen(),
-          // HomeExploreScreen( animationController: this.controller,),
+           HomeExploreScreen( animationController: this.controller,),
         // MapScreen(),
 
     );
@@ -92,7 +71,7 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
     );
 
   }
-}*/
+}
 
 // BlocProvider(
 // create:(context)=>getIt<FilterCubit>() ,

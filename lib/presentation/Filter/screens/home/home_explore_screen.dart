@@ -23,6 +23,7 @@ import '../../widgets/bottom_top_move_animation_view.dart';
 import '../../widgets/common_card.dart';
 import '../../widgets/common_search_bar.dart';
 import '../../widgets/hotelCardItem.dart';
+import '../explore/explore_map&all.dart';
 import '../explore/explore_screen.dart';
 import '../explore/hotel_list_view_page.dart';
 import '../explore/title_view.dart';
@@ -208,7 +209,7 @@ class _HomeExploreScreenState extends State<HomeExploreScreen>
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => explore_screen()),
+                            builder: (context) => HotelHomeScreen()),
                       );
                     },
                     buttonTextWidget: const Padding(

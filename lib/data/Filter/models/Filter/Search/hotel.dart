@@ -10,6 +10,8 @@ class Hotel {
   String? longitude;
   String? latitude;
   String? rate;
+  var screenMapPin;
+  bool isSelected=false;
   String? createdAt;
   String? updatedAt;
   List<HotelImages>? hotelImages;

@@ -27,7 +27,7 @@ class _searchScreenState extends State<searchScreen> with TickerProviderStateMix
     // TODO: implement initState
     super.initState();
 print("from init");
-  FilterCubit.getpref();
+
 
 
   }
