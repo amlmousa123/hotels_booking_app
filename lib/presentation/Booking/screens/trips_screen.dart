@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hotels_booking_app/constants/colors.dart';
+import '../../../busieness_logic/BookingCubit/booking_cubit.dart';
+import '../../../injection/injection.dart';
 import '../widgets/trips_list.dart';
 
 class TripsScreen extends StatefulWidget {
@@ -10,7 +13,6 @@ class TripsScreen extends StatefulWidget {
 }
 
 class _TripsScreenState extends State<TripsScreen> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,15 +38,14 @@ class _TripsScreenState extends State<TripsScreen> {
                 Container(
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius:  BorderRadius.circular(
+                    borderRadius: BorderRadius.circular(
                       40,
                     ),
                     boxShadow: <BoxShadow>[
                       BoxShadow(
-                         color: Colors.black12,
+                          color: Colors.black12,
                           blurRadius: 5.0,
-                         offset: Offset(0.0, 0.75)
-                      )
+                          offset: Offset(0.0, 0.75))
                     ],
                   ),
                   child: TabBar(
@@ -62,14 +63,29 @@ class _TripsScreenState extends State<TripsScreen> {
                     unselectedLabelColor: MyColors.myGery,
                     indicatorColor: Colors.transparent,
                     labelColor: MyColors.myGreen,
-
                   ),
                 ),
                 Expanded(
                   child: TabBarView(children: [
-                    Center(child: TripsList(typeOfTrips: 'upcomming ',)),
-                    Center(child: TripsList(typeOfTrips: 'cancelled  ',)),
-                    Center(child: TripsList(typeOfTrips: 'completed ',)),
+                    Center(
+                        child: BlocProvider(
+                            create: (context) => getIt<BookingCubit>(),
+                            child: TripsList(
+                              typeOfTrips: 'upcomming',
+                            ))),
+                    Center(
+                      child: BlocProvider(
+                          create: (context) => getIt<BookingCubit>(),
+                          child: TripsList(
+                            typeOfTrips: 'cancelled',
+                          )),
+                    ),
+                    Center(
+                        child: BlocProvider(
+                            create: (context) => getIt<BookingCubit>(),
+                            child: TripsList(
+                              typeOfTrips: 'completed',
+                            )))
                   ]),
                 ),
               ],
@@ -78,6 +94,5 @@ class _TripsScreenState extends State<TripsScreen> {
         ),
       ),
     );
-
   }
 }

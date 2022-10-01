@@ -1,6 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hotels_booking_app/busieness_logic/FilterCubit/cubit.dart';
+import '../busieness_logic/BookingCubit/booking_cubit.dart';
+import '../data/Booking/repository/booking_repo.dart';
+import '../data/Booking/web_services/booking_webServices.dart';
 import '../data/Filter/repository/FilterRepo/repository.dart';
 import '../data/Filter/web_services/FilterWebsevices/web_services.dart';
 
@@ -13,4 +16,10 @@ void initGetIt() {
 
 
 
+}
+void initBookingGetIt() {
+  getIt.registerLazySingleton<BookingCubit>(() => BookingCubit(getIt()));
+  getIt.registerLazySingleton<BookingRepo>(() => BookingRepo(getIt()));
+  getIt.registerLazySingleton<BookingWebServices>(
+          () => BookingWebServices(createAndsetupDio()));
 }

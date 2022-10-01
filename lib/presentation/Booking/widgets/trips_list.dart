@@ -39,7 +39,7 @@ class _TripsListState extends State<TripsList> {
           child: ListView.separated(
               itemBuilder: (context, index) => buildTripItem(bookings[index]),
               separatorBuilder: (context, index) => const SizedBox(height: 16),
-              itemCount: 5),
+              itemCount: 7),
         ));
       } else {
         return Container();
