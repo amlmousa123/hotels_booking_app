@@ -5,41 +5,37 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../busieness_logic/Auth/login_cubit/cubit.dart';
 import '../../../busieness_logic/Auth/login_cubit/states.dart';
-import '../../../constants/strings.dart';
-import '../../Filter/screens/home/home_explore_screen.dart';
+import '../../../data/Auth/web_services/cache_helper.dart';
 
 
 
 
-class LoginWidget extends StatefulWidget {
-  @override
-  State<LoginWidget> createState() => _LoginWidgetState();
-}
-
-class _LoginWidgetState extends State<LoginWidget> with SingleTickerProviderStateMixin {
-
- // late AnimationController controller;
+class LoginWidget extends StatelessWidget {
   var emailController = TextEditingController();
-
   var passwordController = TextEditingController();
-
   var formKey = GlobalKey<FormState>();
-
- @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-
-  }
 
   @override
   Widget build(BuildContext context) {
-
     return BlocProvider(
       create: (context) => LoginCubit(),
       child: BlocConsumer<LoginCubit, LoginStates>(
         listener: (context, state) {
           if (state is LoginSuccessState) {
+            CacheHelper.saveDataSharedPreference(
+              key: 'api_token',
+              value: state.loginModel?.data?.api_token,
+            ).then((value)
+            {
+            // var  api_token = state.loginModel?.data?.api_token;
+
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(
+              //     builder: (context) => HomeExploreScreen(),
+              //   ),
+              // );
+            });
             // Navigator.push(
             //   context,
             //   MaterialPageRoute(
@@ -67,7 +63,7 @@ class _LoginWidgetState extends State<LoginWidget> with SingleTickerProviderStat
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    const Text(
+                    Text(
                       'Login',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
@@ -88,7 +84,7 @@ class _LoginWidgetState extends State<LoginWidget> with SingleTickerProviderStat
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 mainAxisAlignment: MainAxisAlignment.center,
-                                children: const [
+                                children: [
                                   Icon(FontAwesomeIcons.facebookF,color: Colors.white,),
                                   Text(
                                     'Facebook',
@@ -112,7 +108,7 @@ class _LoginWidgetState extends State<LoginWidget> with SingleTickerProviderStat
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 mainAxisAlignment: MainAxisAlignment.center,
-                                children: const [
+                                children: [
                                   Icon(FontAwesomeIcons.twitter,color: Colors.white,),
                                   Text(
                                     ' Twitter',
@@ -126,7 +122,7 @@ class _LoginWidgetState extends State<LoginWidget> with SingleTickerProviderStat
                         ),
                       ],
                     ),
-                    const SizedBox(height: 10,),
+                    SizedBox(height: 10,),
                     Center(
                       child: Text(
                         'Or log in with email',
@@ -136,7 +132,7 @@ class _LoginWidgetState extends State<LoginWidget> with SingleTickerProviderStat
                         ),
                       ),
                     ),
-                    const SizedBox(height: 20,),
+                    SizedBox(height: 20,),
                     Form(
                       key: formKey,
                       child: Column(
@@ -287,13 +283,6 @@ class _LoginWidgetState extends State<LoginWidget> with SingleTickerProviderStat
                                 email: emailController.text,
                                 password: passwordController.text,
                               );
-                              if(state is LoginSuccessState) {
-                                Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => HomeExploreScreen( animationController: controller,),),
-                              );
-                              }
                             }
                           },
                           child: const Text(
@@ -319,4 +308,6 @@ class _LoginWidgetState extends State<LoginWidget> with SingleTickerProviderStat
       ),
     );
   }
+
+
 }
