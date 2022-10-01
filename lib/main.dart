@@ -2,20 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hotels_booking_app/busieness_logic/FilterCubit/states.dart';
 import 'package:hotels_booking_app/data/Auth/web_services/dio_helper.dart';
-import 'package:hotels_booking_app/presentation/Auth/Screens/login_screen.dart';
-import 'package:hotels_booking_app/presentation/Auth/Screens/register_screen.dart';
-import 'package:hotels_booking_app/presentation/Filter/screens/Filteration/FilterationScreen.dart';
-import 'package:hotels_booking_app/presentation/Filter/screens/explore/explore_map&all.dart';
-import 'package:hotels_booking_app/presentation/Filter/screens/explore/explore_screen.dart';
-import 'package:hotels_booking_app/presentation/Filter/screens/home/home_explore_screen.dart';
-import 'package:hotels_booking_app/presentation/Filter/screens/map/map_screen.dart';
-
-
-import 'package:hotels_booking_app/presentation/Filter/screens/searchHotels/SearchScreen.dart';
-import 'package:hotels_booking_app/presentation/Profile/Screens/profile_screen.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
-
+import 'package:hotels_booking_app/presentation/Auth/Widgets/onBoarding/onBoarding_widget.dart';
 import 'busieness_logic/Auth/bloc_observer.dart';
 import 'busieness_logic/Auth/register_cubit/cubit.dart';
 import 'busieness_logic/FilterCubit/cubit.dart';
@@ -27,16 +14,13 @@ import 'injection/injection.dart';
 
 void main() {
   //SharedPreferences.setMockInitialValues({});
-  // WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
   initGetIt();
   initGetIt2();
-  BlocOverrides.runZoned(
-        () {
-      runApp(const MyApp());
-    },
-    blocObserver: MyBlocObserver(),
-  );
-  WidgetsFlutterBinding.ensureInitialized(); //
+  Bloc.observer = MyBlocObserver();
+  DioHelper.init();
+  //CacheHelper.init();
+  //WidgetsFlutterBinding.ensureInitialized(); //
 }
 
 class MyApp extends StatefulWidget {
@@ -53,7 +37,6 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
   void initState() {
     // TODO: implement initState
     super.initState();
-    DioHelper.init();
     controller = AnimationController(
       vsync: this, // the SingleTickerProviderStateMixin
       duration: Duration(seconds:3),
@@ -88,8 +71,7 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
 
                   primarySwatch: Colors.blue,
                 ),
-                home: //Profile_screen()
-                RegisterScreen()
+                home: OnBoardingWidget(),
 
               // HomeExploreScreen( animationController: this.controller,),
               // MapScreen(),

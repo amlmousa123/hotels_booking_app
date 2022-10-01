@@ -5,7 +5,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../busieness_logic/Auth/register_cubit/cubit.dart';
 import '../../../busieness_logic/Auth/register_cubit/states.dart';
-import '../../../data/Auth/web_services/cache_helper.dart';
+import '../../../constants/strings.dart';
+import '../../Filter/screens/home/home_explore_screen.dart';
 import '../Screens/login_screen.dart';
 
 
@@ -24,13 +25,12 @@ class RegisterWidget extends StatelessWidget {
       child: BlocConsumer<RegisterCubit, RegisterStates>(
         listener: (context, state) {
           if (state is RegisterSuccessState) {
-
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(
-            //     builder: (context) => HomeScreen(),
-            //   ),
-            // );
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => HomeExploreScreen(animationController: controller,),
+              ),
+            );
           }
         },
         builder: (context, state) {
