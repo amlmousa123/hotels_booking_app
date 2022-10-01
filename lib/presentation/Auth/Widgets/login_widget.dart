@@ -5,17 +5,36 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../busieness_logic/Auth/login_cubit/cubit.dart';
 import '../../../busieness_logic/Auth/login_cubit/states.dart';
+import '../../../constants/strings.dart';
+import '../../Filter/screens/home/home_explore_screen.dart';
 
 
 
 
-class LoginWidget extends StatelessWidget {
+class LoginWidget extends StatefulWidget {
+  @override
+  State<LoginWidget> createState() => _LoginWidgetState();
+}
+
+class _LoginWidgetState extends State<LoginWidget> with SingleTickerProviderStateMixin {
+
+ // late AnimationController controller;
   var emailController = TextEditingController();
+
   var passwordController = TextEditingController();
+
   var formKey = GlobalKey<FormState>();
+
+ @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+  }
 
   @override
   Widget build(BuildContext context) {
+
     return BlocProvider(
       create: (context) => LoginCubit(),
       child: BlocConsumer<LoginCubit, LoginStates>(
@@ -48,7 +67,7 @@ class LoginWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Text(
+                    const Text(
                       'Login',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
@@ -69,7 +88,7 @@ class LoginWidget extends StatelessWidget {
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
+                                children: const [
                                   Icon(FontAwesomeIcons.facebookF,color: Colors.white,),
                                   Text(
                                     'Facebook',
@@ -93,7 +112,7 @@ class LoginWidget extends StatelessWidget {
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
+                                children: const [
                                   Icon(FontAwesomeIcons.twitter,color: Colors.white,),
                                   Text(
                                     ' Twitter',
@@ -107,7 +126,7 @@ class LoginWidget extends StatelessWidget {
                         ),
                       ],
                     ),
-                    SizedBox(height: 10,),
+                    const SizedBox(height: 10,),
                     Center(
                       child: Text(
                         'Or log in with email',
@@ -117,7 +136,7 @@ class LoginWidget extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(height: 20,),
+                    const SizedBox(height: 20,),
                     Form(
                       key: formKey,
                       child: Column(
@@ -268,6 +287,13 @@ class LoginWidget extends StatelessWidget {
                                 email: emailController.text,
                                 password: passwordController.text,
                               );
+                              if(state is LoginSuccessState) {
+                                Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => HomeExploreScreen( animationController: controller,),),
+                              );
+                              }
                             }
                           },
                           child: const Text(
@@ -293,6 +319,4 @@ class LoginWidget extends StatelessWidget {
       ),
     );
   }
-
-
 }

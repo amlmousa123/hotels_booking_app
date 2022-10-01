@@ -163,92 +163,49 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
   Widget _getAppBarUI() {
     return Padding(
       padding: EdgeInsets.only(
-          top: MediaQuery.of(context).padding.top, left: 8, right: 8),
+          top: 40, left: 15, right: 15,),
       child: Column(
         children: [
           Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+
             children: <Widget>[
-              Container(
-                alignment:
-                Alignment.centerLeft,
-                width: AppBar().preferredSize.height + 40,
-                height: AppBar().preferredSize.height,
-                child: Material(
-                  color: Colors.transparent,
-                  child: InkWell(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(32.0),
-                    ),
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Icon(Icons.arrow_back),
-                    ),
-                  ),
+              IconButton(
+                  padding: EdgeInsets.zero,
+                  constraints: BoxConstraints(),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: Icon(Icons.arrow_back)),
+              const Align(
+                alignment: Alignment.center,
+                child: Text(
+                  "Explore",
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold),
                 ),
               ),
-              const Expanded(
-                child: Center(
-                  child: Text(
-                   "Explore",
-                    style: TextStyle(color: Colors.black,fontSize: 20,fontWeight: FontWeight.bold),
-                  ),
-                ),
-              ),
-              Container(
-                width: AppBar().preferredSize.height + 40,
-                height: AppBar().preferredSize.height,
-                child: Column(
-                  children: [
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: <Widget>[
-                        Material(
-                          color: Colors.transparent,
-                          child: InkWell(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(32.0),
-                            ),
-                            onTap: () {},
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Icon(Icons.favorite_border),
-                            ),
-                          ),
-                        ),
-                        Material(
-                          color: Colors.transparent,
-                          child: InkWell(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(32.0),
-                            ),
-                            onTap: () {
 
-                              setState(() {
-                                _isShowMap = !_isShowMap;
-                              });
-                            },
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Icon(_isShowMap
-                                  ? Icons.sort
-                                  : FontAwesomeIcons.mapMarkedAlt),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+              IconButton(
+                padding: EdgeInsets.zero,
+                constraints: BoxConstraints(),
 
-                  ],
-                ),
+                onPressed: () {
+
+                  setState(() {
+                    _isShowMap = !_isShowMap;
+                  });
+                },
+              icon: Icon(_isShowMap
+                    ? Icons.sort
+                    : FontAwesomeIcons.mapMarkedAlt),
               )
             ],
           ),
+          SizedBox(height: 15,),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -274,7 +231,10 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
                 // ),
               ),
               Expanded(
+
                 child: MaterialButton(
+                  padding: EdgeInsets.zero,
+
                   height: 45,
                   shape: CircleBorder(),
                   //padding: EdgeInsets.all(24),

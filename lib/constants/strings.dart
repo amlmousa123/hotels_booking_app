@@ -1,4 +1,4 @@
-const googleApiKey= "AIzaSyC552GGg5HkDJ5A4hUcQAh5hQvqx6UWhZ8";
+import 'package:flutter/animation.dart';
 
-const charactersScreen ='/';
-const  characterDetailsScreen ='/character_details_screen';
+const googleApiKey= "AIzaSyC552GGg5HkDJ5A4hUcQAh5hQvqx6UWhZ8";
+late AnimationController controller;
