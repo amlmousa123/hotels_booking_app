@@ -11,6 +11,7 @@ import '../../../data/Auth/web_services/cache_helper.dart';
 
 class RegisterWidget extends StatelessWidget {
   var emailController = TextEditingController();
+  var nameController = TextEditingController();
   var passwordController = TextEditingController();
   var confirmedPasswordController = TextEditingController();
   var formKey = GlobalKey<FormState>();
@@ -144,6 +145,53 @@ class RegisterWidget extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               Text(
+                                'Your name',
+                                style: TextStyle(
+                                  //fontSize: 15,
+                                    color: Colors.grey[600]
+                                ),
+                              ),
+                              TextFormField(
+                                controller: nameController,
+                                validator: (value) {
+                                  if (value!.isEmpty) {
+                                    return 'Please enter your name';
+                                  }
+                                  return null;
+                                },
+                                decoration: InputDecoration(
+                                  filled: true,
+                                  fillColor: Colors.grey[200],
+                                  hintText: 'enter your name',
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(25),
+                                    borderSide: BorderSide.none,
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(25),
+                                    borderSide: BorderSide.none,
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                      color: Colors.grey,
+                                      width: 1,
+                                    ),
+                                    borderRadius: BorderRadius.circular(25),
+                                  ),
+                                  hintStyle: const TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 10,),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Text(
                                 'Your email',
                                 style: TextStyle(
                                   //fontSize: 15,
@@ -185,7 +233,7 @@ class RegisterWidget extends StatelessWidget {
                               ),
                             ],
                           ),
-                          SizedBox(height: 20,),
+                          SizedBox(height: 10,),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.start,
@@ -233,7 +281,7 @@ class RegisterWidget extends StatelessWidget {
                               ),
                             ],
                           ),
-                          SizedBox(height: 20,),
+                          SizedBox(height: 10,),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.start,
@@ -304,6 +352,7 @@ class RegisterWidget extends StatelessWidget {
                                 email: emailController.text,
                                 password: passwordController.text,
                                 confirmPassword: confirmedPasswordController.text,
+                                name: nameController.text,
                               );
                             }
                           },

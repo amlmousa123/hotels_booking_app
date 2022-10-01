@@ -3,17 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hotels_booking_app/busieness_logic/FilterCubit/states.dart';
 import 'package:hotels_booking_app/data/Auth/web_services/dio_helper.dart';
 import 'package:hotels_booking_app/presentation/Auth/Screens/login_screen.dart';
-import 'package:hotels_booking_app/presentation/Auth/Screens/register_screen.dart';
-import 'package:hotels_booking_app/presentation/Filter/screens/Filteration/FilterationScreen.dart';
-import 'package:hotels_booking_app/presentation/Filter/screens/explore/explore_map&all.dart';
-import 'package:hotels_booking_app/presentation/Filter/screens/explore/explore_screen.dart';
-import 'package:hotels_booking_app/presentation/Filter/screens/home/home_explore_screen.dart';
-import 'package:hotels_booking_app/presentation/Filter/screens/map/map_screen.dart';
 
-
-import 'package:hotels_booking_app/presentation/Filter/screens/searchHotels/SearchScreen.dart';
-import 'package:hotels_booking_app/presentation/Profile/Screens/profile_screen.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 
 import 'busieness_logic/Auth/bloc_observer.dart';
@@ -21,11 +11,12 @@ import 'busieness_logic/Auth/register_cubit/cubit.dart';
 import 'busieness_logic/FilterCubit/cubit.dart';
 import 'busieness_logic/ProfileCubit/cubit.dart';
 import 'constants/strings.dart';
+import 'data/Auth/web_services/cache_helper.dart';
 import 'data/profile/rebo/profile_rebo.dart';
 import 'data/profile/rebo/update_rebo.dart';
 import 'injection/injection.dart';
 
-void main() {
+Future<void> main() async {
   //SharedPreferences.setMockInitialValues({});
  // WidgetsFlutterBinding.ensureInitialized();
   initGetIt();
