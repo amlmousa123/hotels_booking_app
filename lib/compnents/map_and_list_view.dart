@@ -40,33 +40,6 @@ class _MapAndListViewState extends State<MapAndListView> {
   late Marker currentLocationMarker;
   late CameraPosition goToSearchedForPlace;
 
-  // void buildCurrentLocationMarker() {
-  //   currentLocationMarker = Marker(
-  //     position: LatLng(position!.latitude, position!.longitude),
-  //     markerId: MarkerId('2'),
-  //     onTap: () {},
-  //     infoWindow: InfoWindow(title: "Your current Location"),
-  //     icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
-  //   );
-  //   addMarkerToMarkersAndUpdateUI(currentLocationMarker);
-  // }
-
-  void addMarkerToMarkersAndUpdateUI(Marker marker) {
-    setState(() {
-      markers.add(marker);
-    });
-  }
-
-
-  // static Position? position;
-  // static final CameraPosition _myCurrentLocationCameraPosition = CameraPosition(
-  //   bearing: 0.0,
-  //   target: LatLng(position!.latitude, position!.longitude),
-  //   tilt: 0.0,
-  //   zoom: 17,
-  // );
-
-
 
 
 

@@ -22,6 +22,7 @@ class FilterCubit extends Cubit<Filterstates> {
   FilterCubit(this.myrepo) : super(initialhotelstate());
   static FilterCubit get(context) => BlocProvider.of(context);
   static bool isShowMap=false;
+  late GoogleMapController controller;
   final searchcontroller=TextEditingController();
    List<bool> isswitchedlist=[];
  hotelsSearch allHotels=new hotelsSearch();
@@ -35,7 +36,9 @@ class FilterCubit extends Cubit<Filterstates> {
   static late Marker searchedPlaceMarker;
   static late Marker currentLocationMarker;
   late CameraPosition goToSearchedForPlace;
+  static Position? position;
 
+  Completer<GoogleMapController> mapController = Completer();
   var progressIndicator = false;
   late List<LatLng> polylinePoints;
   var isSearchedPlaceMarkerClicked = false;
@@ -47,6 +50,7 @@ print("koko");
     emit(removeAllMarkersAndUpdateUIstate());
   }
   void buildCameraNewPosition(double lat , double long) {
+
     goToSearchedForPlace = CameraPosition(
       bearing: 0.0,
       tilt: 0.0,
@@ -56,6 +60,7 @@ print("koko");
       ),
       zoom: 13,
     );
+    print("finall");
   }
   void buildCurrentLocationMarker() {
     currentLocationMarker = Marker(
@@ -75,9 +80,7 @@ print("koko");
      emit(addMarkerToMarkersAndUpdateUIstate()) ;
 
   }
-  static Position? position;
 
-  Completer<GoogleMapController> mapController = Completer();
 
   static final CameraPosition myCurrentLocationCameraPosition = CameraPosition(
     bearing: 0.0,
@@ -93,13 +96,19 @@ print("koko");
     isSearchedPlaceMarkerClicked=false;
     removeAllMarkersAndUpdateUI();
     print(isSearchedPlaceMarkerClicked);
+    print("hereeeeeeeeee");
+       print("$lat,$lng");
     buildCameraNewPosition(lat,lng);
-    final GoogleMapController controller = await mapController.future;
-    controller
-        .animateCamera(CameraUpdate.newCameraPosition(goToSearchedForPlace)).then((vall){
-      buildCurrentLocationMarker();
-      buildSearchedPlaceMarker(descp);
+    mapController.future.then((value)  {
+      controller=value;
+      controller
+          .animateCamera(CameraUpdate.newCameraPosition(goToSearchedForPlace)).then((vall){
+        buildCurrentLocationMarker();
+        buildSearchedPlaceMarker(descp);
+      });
     });
+
+
 
   }
 
@@ -114,7 +123,7 @@ print("koko");
       position: goToSearchedForPlace.target,
       markerId: MarkerId('1'),
       onTap: () {
-
+        print(goToSearchedForPlace.target);
         print("hiiiiiiiiiiiiiii");
         print(isSearchedPlaceMarkerClicked);
         isSearchedPlaceMarkerClicked = false;

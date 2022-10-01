@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hotels_booking_app/busieness_logic/FilterCubit/states.dart';
 import 'package:hotels_booking_app/presentation/Filter/screens/Filteration/FilterationScreen.dart';
+import 'package:hotels_booking_app/presentation/Filter/screens/explore/explore_map&all.dart';
 import 'package:hotels_booking_app/presentation/Filter/screens/explore/explore_screen.dart';
 import 'package:hotels_booking_app/presentation/Filter/screens/home/home_explore_screen.dart';
 import 'package:hotels_booking_app/presentation/Filter/screens/map/map_screen.dart';
@@ -42,12 +43,14 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
   }
   @override
   Widget build(BuildContext context) {
+    FilterCubit.getpref();
     return MultiBlocProvider(
 
       providers:[
         BlocProvider(
         create:(context)=>getIt<FilterCubit>()..emitGetAllFacilities()
             ..getAllhotels()
+
     )],
     child: BlocBuilder<FilterCubit,Filterstates>(
 
@@ -61,8 +64,9 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
             primarySwatch: Colors.blue,
           ),
           home:
-           HomeExploreScreen( animationController: this.controller,),
+          HomeExploreScreen( animationController: this.controller,),
         // MapScreen(),
+      // HotelHomeScreen()
 
     );
 

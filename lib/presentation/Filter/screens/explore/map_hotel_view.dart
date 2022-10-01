@@ -177,15 +177,17 @@ class _MapHotelListViewState extends State<MapHotelListView> {
                                   color:
                                   Theme.of(context).primaryColor,
                                 ),
-                                Text(
-                                  widget.hotelData.address!,
-                                  maxLines: 1,
-                                  overflow: TextOverflow.clip,
-                                  textAlign: TextAlign.left,
-                                  style: TextStyles(context)
-                                      .getDescriptionStyle()
-                                      .copyWith(
-                                    fontSize: 3,
+                                Expanded(
+                                  child: Text(
+                                    widget.hotelData.address!,
+                                   // maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    textAlign: TextAlign.left,
+                                    style: TextStyles(context)
+                                        .getDescriptionStyle()
+                                        .copyWith(
+                                      fontSize: 14,
+                                    ),
                                   ),
                                 ),
                                 // Text(
@@ -214,37 +216,13 @@ class _MapHotelListViewState extends State<MapHotelListView> {
                                     crossAxisAlignment:
                                     CrossAxisAlignment.start,
                                     children: <Widget>[
-                                      // Row(
-                                      //   crossAxisAlignment:
-                                      //   CrossAxisAlignment.center,
-                                      //   children: <Widget>[
-                                      //     Icon(
-                                      //       FontAwesomeIcons.mapMarkerAlt,
-                                      //       size: 12,
-                                      //       color:
-                                      //       Theme.of(context).primaryColor,
-                                      //     ),
-                                      //     Text(
-                                      //       " ${hotelData.address}",
-                                      //       overflow: TextOverflow.ellipsis,
-                                      //       style: TextStyles(context)
-                                      //           .getDescriptionStyle()
-                                      //           .copyWith(
-                                      //         fontSize: 5,
-                                      //       ),
-                                      //     ),
-                                      //     // Text(
-                                      //     //   AppLocalizations(context)
-                                      //     //       .of("km_to_city"),
-                                      //     //   overflow: TextOverflow.ellipsis,
-                                      //     //   style: TextStyles(context)
-                                      //     //       .getDescriptionStyle()
-                                      //     //       .copyWith(
-                                      //     //     fontSize: 14,
-                                      //     //   ),
-                                      //     // ),
-                                      //   ],
-                                      // ),
+                                      Row(
+                                        children: [
+
+                                          Text(widget.hotelData.rate!,style:TextStyle(color: Colors.amber),),
+                                          Icon(Icons.star,size: 15,color: Colors.amber,),
+                                        ],
+                                      ),
                                       Padding(
                                         padding: const EdgeInsets.only(top: 4),
                                         child:  RatingBarIndicator(
@@ -253,8 +231,8 @@ class _MapHotelListViewState extends State<MapHotelListView> {
                                             Icons.star,
                                             color: Colors.amber,
                                           ),
-                                          itemCount: 5,
-                                          itemSize: 19.0,
+                                          itemCount: 10,
+                                          itemSize: 13.0,
                                           direction: Axis.horizontal,
                                         ),
                                       ),
@@ -279,7 +257,7 @@ class _MapHotelListViewState extends State<MapHotelListView> {
                                         style: TextStyles(context)
                                             .getDescriptionStyle()
                                             .copyWith(
-                                          fontSize: 14,
+                                          fontSize: 9,
                                         ),
                                       ),
                                     ],

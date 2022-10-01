@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:dio/dio.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:retrofit/retrofit.dart';
 
 import '../models/Update_info.dart';
@@ -18,7 +19,7 @@ abstract class WebServiceUpdate {
     @Header("token") required String token,
     @Field("name") required String name,
     @Field("email") required String email,
-    @Field("image") required String image,
+    @Field("image") required XFile image,
   });
 
 }
