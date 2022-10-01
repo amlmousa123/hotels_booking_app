@@ -30,12 +30,9 @@ void main() {
  // WidgetsFlutterBinding.ensureInitialized();
   initGetIt();
   initGetIt2();
-  BlocOverrides.runZoned(
-        () {
-      runApp(const MyApp());
-    },
-    blocObserver: MyBlocObserver(),
-  );
+  Bloc.observer = MyBlocObserver();
+  DioHelper.init();
+  await CacheHelper.init();
   WidgetsFlutterBinding.ensureInitialized(); //
 }
 

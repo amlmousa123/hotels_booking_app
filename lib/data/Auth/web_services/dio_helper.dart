@@ -21,23 +21,16 @@ class DioHelper {
     return await dio!.get(url, queryParameters: query);
   }
 
-  // static Future<Response> postData({
-  //   required String url,
-  //   Map<String, dynamic>? query,
-  //   required Map<String, dynamic> body,
-  // }) async {
-  //
-  //   return await dio!.post(url, data: body);
-  // }
+
   static Future<Response> postData({
     required String url,
     Map<String, dynamic>? query,
+    String? api_token,
     required Map<String, dynamic> body,
   }) async {
-    print("respppppppppp");
-    print(body);
-    var response=await dio!.post(url, data: body);
-    print("resppppppppppppppppppp${response.data}");
-    return response;
+    dio?.options.headers = {
+      if (api_token != null) 'token': api_token,
+    };
+    return await dio!.post(url, data: body);
   }
 }
