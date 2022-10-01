@@ -4,4 +4,5 @@ const googleApiKey= "AIzaSyC552GGg5HkDJ5A4hUcQAh5hQvqx6UWhZ8";
 late AnimationController controller;
 
 const onboarding ='/';
-const  profileScreen ='/';
+const  profileScreen ='/profile2';
+const  tripsScreen ='/profile2';
