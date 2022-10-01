@@ -27,7 +27,7 @@ class FilterCubit extends Cubit<Filterstates> {
    List<bool> isswitchedlist=[];
  hotelsSearch allHotels=new hotelsSearch();
   static hotelsSearch FilteredHotels=new hotelsSearch();
-  List adresses=['Not selected','rome','tanta'];
+  List adresses=['Not selected','Sahl Hasheesh','Intercontinental district',"Safaga Road","El Dahar",];
   String selectedAdresse='Not selected';
   static hotelsSearch searchedhotels=new hotelsSearch();
   MyRepo myrepo;
