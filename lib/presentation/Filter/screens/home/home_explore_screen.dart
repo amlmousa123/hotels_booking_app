@@ -42,7 +42,7 @@ class _HomeExploreScreenState extends State<HomeExploreScreen>
     with TickerProviderStateMixin  {
  // var hotelList = HotelListData.hotelList;
   late ScrollController controller;
-  late AnimationController _animationController;
+  late AnimationController econtroller;
   var sliderImageHieght = 0.0;
   List<Hotel>? allhotels=[];
   late Animation<double> _animation;
@@ -50,7 +50,7 @@ class _HomeExploreScreenState extends State<HomeExploreScreen>
   void initState() {
     super.initState();
     BlocProvider.of<FilterCubit>(context).getAllhotels();
-    _animationController =
+    econtroller =
         AnimationController(duration: Duration(milliseconds: 0), vsync: this);
 
     widget.animationController.forward();
@@ -60,16 +60,16 @@ class _HomeExploreScreenState extends State<HomeExploreScreen>
         if (mounted) {
           if (controller.offset < 0) {
             // we static set the just below half scrolling values
-            _animationController.animateTo(0.0);
+            econtroller.animateTo(0.0);
           } else if (controller.offset > 0.0 &&
               controller.offset < sliderImageHieght) {
             // we need around half scrolling values
             if (controller.offset < ((sliderImageHieght / 1.5))) {
-              _animationController
+              econtroller
                   .animateTo((controller.offset / sliderImageHieght));
             } else {
               // we static set the just above half scrolling values "around == 0.64"
-              _animationController
+              econtroller
                   .animateTo((sliderImageHieght / 1.5) / sliderImageHieght);
             }
           }
@@ -77,7 +77,7 @@ class _HomeExploreScreenState extends State<HomeExploreScreen>
       });
     _animation =
         Tween(begin: 0.0, end: 1.0).animate(CurvedAnimation(
-            parent: _animationController,
+            parent: econtroller,
             curve: Curves.easeOut
         ));
   }
@@ -155,7 +155,7 @@ class _HomeExploreScreenState extends State<HomeExploreScreen>
                  _sliderUI(),
 
                  // viewHotels Button UI for click event
-                  _viewHotelsButton(_animationController),
+                  _viewHotelsButton(econtroller),
 
                  //just gradient for see the time and battry Icon on "TopBar"
                  // Positioned(
@@ -247,15 +247,15 @@ class _HomeExploreScreenState extends State<HomeExploreScreen>
       child: AnimatedBuilder(
 
 
-        animation: _animationController,
+        animation: econtroller,
         builder: (BuildContext context, Widget? child) {
           // we calculate the opecity between 0.64 to 1.0
           var opecity = 1.0 -
-              (_animationController.value > 0.64
+              (econtroller.value > 0.64
                   ? 1.0
-                  : _animationController.value);
+                  : econtroller.value);
           return SizedBox(
-            height: sliderImageHieght * (1.0 - _animationController.value),
+            height: sliderImageHieght * (1.0 - econtroller.value),
             child: HomeExploreSliderView(
               opValue: opecity,
               click: () {},

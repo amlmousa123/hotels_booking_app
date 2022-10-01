@@ -29,7 +29,7 @@ class _Profile_WidgetState extends State<Profile_Widget> {
   Widget build(BuildContext context) {
 
       List<Widget> _widgetOptions = <Widget>[
-      HomeExploreScreen( animationController: controller,),
+      HomeExploreScreen( animationController: econtroller,),
       TripsScreen(),
       profile2(),
     ];
