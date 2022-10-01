@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../busieness_logic/Auth/login_cubit/cubit.dart';
 import '../../../busieness_logic/Auth/login_cubit/states.dart';
+import '../../../data/Auth/web_services/cache_helper.dart';
 
 
 
@@ -21,6 +22,20 @@ class LoginWidget extends StatelessWidget {
       child: BlocConsumer<LoginCubit, LoginStates>(
         listener: (context, state) {
           if (state is LoginSuccessState) {
+            CacheHelper.saveDataSharedPreference(
+              key: 'api_token',
+              value: state.loginModel?.data?.api_token,
+            ).then((value)
+            {
+            // var  api_token = state.loginModel?.data?.api_token;
+
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(
+              //     builder: (context) => HomeExploreScreen(),
+              //   ),
+              // );
+            });
             // Navigator.push(
             //   context,
             //   MaterialPageRoute(

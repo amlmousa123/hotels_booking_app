@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hotels_booking_app/busieness_logic/FilterCubit/states.dart';
-import 'package:hotels_booking_app/presentation/Filter/screens/Filteration/FilterationScreen.dart';
-import 'package:hotels_booking_app/presentation/Filter/screens/explore/explore_screen.dart';
 import 'package:hotels_booking_app/presentation/Filter/screens/home/home_explore_screen.dart';
-import 'package:hotels_booking_app/presentation/Filter/screens/map/map_screen.dart';
 
 
-import 'package:hotels_booking_app/presentation/Filter/screens/searchHotels/SearchScreen.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-
+import 'busieness_logic/Auth/bloc_observer.dart';
 import 'busieness_logic/FilterCubit/cubit.dart';
+import 'data/Auth/web_services/cache_helper.dart';
+import 'data/Auth/web_services/dio_helper.dart';
 import 'injection/injection.dart';
 
-void main() {
+Future<void> main() async {
+  Bloc.observer = MyBlocObserver();
+  DioHelper.init();
+  await CacheHelper.init();
   //SharedPreferences.setMockInitialValues({});
  // WidgetsFlutterBinding.ensureInitialized();
   initGetIt();
