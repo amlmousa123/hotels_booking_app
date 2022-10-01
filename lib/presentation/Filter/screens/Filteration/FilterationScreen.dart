@@ -153,40 +153,40 @@ getFacilities? allfacilties;
                             SizedBox(height: 10,),
                             Divider(thickness: 2,),
                             SizedBox(height: 20,),
-                            Text("Adresse",style: TextStyle(color: Colors.grey),),
-                            SizedBox(height: 20,),
-                            DropdownButtonFormField(
-                                  decoration:  const InputDecoration(
-                                      isDense: true,
-                                      contentPadding: EdgeInsets.all(8),
-                                      filled: true,
-                                      fillColor: Colors.white,
-                                      hoverColor: Colors.red,
-                                      focusColor: Colors.black,
-
-                                      prefixIcon:Icon(Icons.location_on),
-                                      border: OutlineInputBorder(
-                                       // borderSide: BorderSide(color: Colors.white),
-                                       // borderRadius:  BorderRadius.circular(25.7),
-
-                                      ),
-                                      hintStyle: TextStyle(color: Colors.grey,fontSize: 13)
-
-                                  ),
-                                items: BlocProvider.of<FilterCubit>(context).adresses.map((e) => 
-                                DropdownMenuItem(child: Text(e),value: e,)
-                                
-                                ).toList(),
-                                value:  BlocProvider.of<FilterCubit>(context).selectedAdresse,
-
-                                onChanged: (vall)
-                              {
-                                BlocProvider.of<FilterCubit>(context).updateaddress(vall as String);
-
-                              },
-                              icon:Icon( Icons.arrow_drop_down,color: Colors.indigoAccent,),
-
-                            )
+                            // Text("Adresse",style: TextStyle(color: Colors.grey),),
+                            // SizedBox(height: 20,),
+                            // DropdownButtonFormField(
+                            //       decoration:  const InputDecoration(
+                            //           isDense: true,
+                            //           contentPadding: EdgeInsets.all(8),
+                            //           filled: true,
+                            //           fillColor: Colors.white,
+                            //           hoverColor: Colors.red,
+                            //           focusColor: Colors.black,
+                            //
+                            //           prefixIcon:Icon(Icons.location_on),
+                            //           border: OutlineInputBorder(
+                            //            // borderSide: BorderSide(color: Colors.white),
+                            //            // borderRadius:  BorderRadius.circular(25.7),
+                            //
+                            //           ),
+                            //           hintStyle: TextStyle(color: Colors.grey,fontSize: 13)
+                            //
+                            //       ),
+                            //     items: BlocProvider.of<FilterCubit>(context).adresses.map((e) =>
+                            //     DropdownMenuItem(child: Text(e),value: e,)
+                            //
+                            //     ).toList(),
+                            //     value:  BlocProvider.of<FilterCubit>(context).selectedAdresse,
+                            //
+                            //     onChanged: (vall)
+                            //   {
+                            //     BlocProvider.of<FilterCubit>(context).updateaddress(vall as String);
+                            //
+                            //   },
+                            //   icon:Icon( Icons.arrow_drop_down,color: Colors.indigoAccent,),
+                            //
+                            // )
 
                           ],
                         ),
