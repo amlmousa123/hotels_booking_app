@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:hotels_booking_app/busieness_logic/BookingCubit/booking_cubit.dart';
 import 'package:hotels_booking_app/presentation/Booking/widgets/trips_list.dart';
 
 import '../../../constants/colors.dart';
@@ -38,6 +39,7 @@ class _HotelDetailesState extends State<HotelDetailes>
 
   @override
   void initState() {
+    BlocProvider.of<BookingCubit>(context).createBooking(widget.hotelData.id!);
     animationController = AnimationController(
         duration: Duration(milliseconds: 2000), vsync: this);
     _animationController =
@@ -175,8 +177,7 @@ class _HotelDetailesState extends State<HotelDetailes>
                     backgroundColor: MyColors.myGreen,
                     buttonText: "book now",
                     onTap: () {
-                      //    NavigationServices(context)
-                      //      .gotoRoomBookingScreen(widget.hotelData.titleTxt);
+
                     },
                   ),
                 ),
