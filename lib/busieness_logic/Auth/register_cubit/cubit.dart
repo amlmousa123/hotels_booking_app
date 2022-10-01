@@ -16,16 +16,20 @@ class RegisterCubit extends Cubit<RegisterStates> {
   LoginModel? loginModel;
 
   void userRegister(
-      {required String email, required String password, required String confirmPassword}) {
+      {required String name,required String email, required String password, required String confirmPassword}) {
     emit(RegisterLoadingState());
+    print("email $email password $password name $name  confirm $confirmPassword" );
     DioHelper.postData(url: REGISTER, body: {
+      'name':name,
       'email': email,
       'password': password,
-      'confirmPassword' : confirmPassword,
+      'password_confirmation' : confirmPassword,
     }).then((value) {
+      print(value.toString());
       loginModel = LoginModel.fromJson(value.data);
-      emit(RegisterSuccessState(loginModel!));
+      emit(RegisterSuccessState(loginModel));
     }).catchError((error) {
+      print(" erorrrrrrrrrrrrrrrrrrrrrrrr${error.toString()}");
       emit(RegisterErrorState(error.toString()));
     });
   }

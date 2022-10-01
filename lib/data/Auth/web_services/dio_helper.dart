@@ -34,6 +34,10 @@ class DioHelper {
     Map<String, dynamic>? query,
     required Map<String, dynamic> body,
   }) async {
-    return await dio!.post(url, data: body);
+    print("respppppppppp");
+    print(body);
+    var response=await dio!.post(url, data: body);
+    print("resppppppppppppppppppp${response.data}");
+    return response;
   }
 }

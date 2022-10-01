@@ -38,15 +38,16 @@ class HomeExploreScreen extends StatefulWidget {
 }
 
 class _HomeExploreScreenState extends State<HomeExploreScreen>
-    with TickerProviderStateMixin {
+    with TickerProviderStateMixin  {
  // var hotelList = HotelListData.hotelList;
   late ScrollController controller;
   late AnimationController _animationController;
   var sliderImageHieght = 0.0;
   List<Hotel>? allhotels=[];
-
+  late Animation<double> _animation;
   @override
   void initState() {
+    super.initState();
     BlocProvider.of<FilterCubit>(context).getAllhotels();
     _animationController =
         AnimationController(duration: Duration(milliseconds: 0), vsync: this);
@@ -73,13 +74,18 @@ class _HomeExploreScreenState extends State<HomeExploreScreen>
           }
         }
       });
-    super.initState();
+    _animation =
+        Tween(begin: 0.0, end: 1.0).animate(CurvedAnimation(
+            parent: _animationController,
+            curve: Curves.easeOut
+        ));
   }
 
   @override
   Widget build(BuildContext context) {
     sliderImageHieght = MediaQuery.of(context).size.width * 1.3;
     return Scaffold(
+      backgroundColor: Colors.white,
       body: BottomTopMoveAnimationView(
         animationController: widget.animationController,
         child: Container(
@@ -237,6 +243,8 @@ class _HomeExploreScreenState extends State<HomeExploreScreen>
       left: 0,
       right: 0,
       child: AnimatedBuilder(
+
+
         animation: _animationController,
         builder: (BuildContext context, Widget? child) {
           // we calculate the opecity between 0.64 to 1.0
