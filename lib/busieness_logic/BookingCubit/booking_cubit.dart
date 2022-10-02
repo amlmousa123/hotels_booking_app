@@ -6,12 +6,14 @@ import 'booking_states.dart';
 
 class BookingCubit extends Cubit<BookingState> {
   final BookingRepo bookingRepo;
-  late Booking booking;
+ Booking? booking;
 
   BookingCubit(this.bookingRepo) : super(InitialBooking());
 
   void createBooking(int hotelId) {
+    print("iddddddddddddd $hotelId");
     bookingRepo.createBooking(hotelId).then((value) {
+      print("valllllllllllllllllllllllll $value");
       emit(BookingCreated(value));
     });
   }
@@ -22,12 +24,16 @@ class BookingCubit extends Cubit<BookingState> {
     });
   }
 
-  Booking getBooking(String type) {
+  Booking? getBooking(String type) {
+    this.booking=null;
+    emit(loadingbookingstate());
     bookingRepo.getMyBooking(type, 10).then((booking) {
-      emit(BookingLoaded(booking));
+
       this.booking = booking;
+      emit(BookingLoaded(booking));
+      return booking;
     });
-    print(booking.data);
+    print(booking?.data);
     return booking;
 
   }

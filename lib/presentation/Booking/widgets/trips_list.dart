@@ -7,6 +7,8 @@ import 'package:hotels_booking_app/constants/colors.dart';
 
 import '../../../busieness_logic/BookingCubit/booking_cubit.dart';
 import '../../../data/Booking/models/booking_ model.dart';
+import '../../../utils/text_styles.dart';
+import '../../Filter/widgets/NoHotelsFound.dart';
 import '../../Filter/widgets/hotelCardItem.dart';
 
 class TripsList extends StatefulWidget {
@@ -25,25 +27,32 @@ class _TripsListState extends State<TripsList> {
 
   @override
   void initState() {
-    BlocProvider.of<BookingCubit>(context).getBooking(widget.typeOfTrips);
     super.initState();
+    BlocProvider.of<BookingCubit>(context).getBooking(widget.typeOfTrips);
+
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<BookingCubit, BookingState>(builder: (context, state) {
-      if (state is BookingLoaded) {
-        bookings = BlocProvider.of<BookingCubit>(context).getBooking(widget.typeOfTrips).data.data;
-        return Expanded(
-            child: Padding(
+      if (state is BookingLoaded && BlocProvider.of<BookingCubit>(context).booking != null  ) {
+        bookings = (BlocProvider.of<BookingCubit>(context).booking?.data.data)!;
+        return Padding(
           padding: const EdgeInsets.symmetric(vertical: 16),
           child: ListView.separated(
-              itemBuilder: (context, index) => buildTripItem(bookings[index]),
-              separatorBuilder: (context, index) => const SizedBox(height: 16),
-              itemCount: bookings.length),
-        ));
-      } else {
-        return Container();
+
+          itemBuilder: (context, index) => buildTripItem(bookings[index]),
+          separatorBuilder: (context, index) => const SizedBox(height: 16),
+          itemCount: bookings.length),
+        );
+      }
+      else if(BlocProvider.of<BookingCubit>(context).booking == null )
+        {
+          return NoHotelsFound(message: 'No Hotels Found',
+            image: "assets/images/hotel.svg",);
+        }
+      else   {
+        return Center(child: CircularProgressIndicator());
       }
     });
   }
@@ -90,32 +99,54 @@ class _TripsListState extends State<TripsList> {
                         ),
                       ),
                     ),
-                    Text(
-                      bookingItem.hotel.price.toString(),
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                      ),
+
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: <Widget>[
+                        Text(
+                          "\$${  bookingItem.hotel.price.toString()}",
+                          textAlign: TextAlign.left,
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 22,
+                          ),
+                        ),
+                        Text(
+                          "per_night",
+                          style: TextStyles(context)
+                              .getDescriptionStyle()
+                              .copyWith(
+                            fontSize: 9,
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
                 const SizedBox(height: 8),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children:  [
-                    Icon(
-                      Icons.star_rate_rounded,
-                      color: Colors.amber,
-                      size: 24,
+                    buildStarsRateBar(double.parse( bookingItem.hotel.rate.toString())),
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.star_rate_rounded,
+                          color:MyColors.myGreen,
+                          size: 24,
+                        ),
+                        Text(
+                          bookingItem.hotel.rate.toString(),
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
                     ),
-                    Text(
-                      bookingItem.hotel.rate.toString(),
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+
                   ],
                 ),
               ],
@@ -135,7 +166,7 @@ class _TripsListState extends State<TripsList> {
         Icons.star,
         color: MyColors.myGreen,
       ),
-      itemCount: 5,
+      itemCount: 10,
       itemSize: 19.0,
       direction: Axis.horizontal,
     );

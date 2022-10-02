@@ -161,7 +161,7 @@ class _OnBoardingWidgetState extends State<OnBoardingWidget> {
                 child: const Text(
                   'Skip',
                   style: TextStyle(
-                    fontSize: 18,
+                    fontSize: 16,
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                   ),
@@ -182,7 +182,7 @@ class _OnBoardingWidgetState extends State<OnBoardingWidget> {
       SizedBox(
         height: 10,
       ),
-      Image(image: AssetImage('${model.image}')),
+      Expanded(child: Image(image: AssetImage('${model.image}'))),
       SizedBox(height: 22,),
       Text(
         '${model.title}',

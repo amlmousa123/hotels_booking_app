@@ -24,18 +24,21 @@ class RegisterWidget extends StatelessWidget {
       create: (BuildContext context) => RegisterCubit(),
       child: BlocConsumer<RegisterCubit, RegisterStates>(
         listener: (context, state) {
-          if (state is RegisterSuccessState) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => HomeExploreScreen(animationController: econtroller,),
-              ),
-            );
+          if (state is RegisterwrongState) {
+            var snackBar = SnackBar(content: Text(((state).loginModel?.status?.title?.en)!));
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
           }
+          else if(state is RegisterSuccessState)
+            {
+              var snackBar = SnackBar(content: Text(((state).loginModel?.status?.title?.en)!));
+              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+            }
         },
         builder: (context, state) {
           return Scaffold(
+            backgroundColor: Colors.white,
             appBar: AppBar(
+              elevation: 0.0,
                 backgroundColor: Colors.white,
                 leading: IconButton(
                   icon: const Icon(Icons.arrow_back,color: Colors.black,) ,

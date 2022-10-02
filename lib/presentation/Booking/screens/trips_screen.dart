@@ -68,24 +68,18 @@ class _TripsScreenState extends State<TripsScreen> {
                 Expanded(
                   child: TabBarView(children: [
                     Center(
-                        child: BlocProvider(
-                            create: (context) => getIt<BookingCubit>(),
-                            child: TripsList(
-                              typeOfTrips: 'upcomming',
-                            ))),
+                        child: TripsList(
+                          typeOfTrips: 'upcomming',
+                        )),
                     Center(
-                      child: BlocProvider(
-                          create: (context) => getIt<BookingCubit>(),
-                          child: TripsList(
-                            typeOfTrips: 'cancelled',
-                          )),
+                      child: TripsList(
+                        typeOfTrips: 'cancelled',
+                      ),
                     ),
                     Center(
-                        child: BlocProvider(
-                            create: (context) => getIt<BookingCubit>(),
-                            child: TripsList(
-                              typeOfTrips: 'completed',
-                            )))
+                        child: TripsList(
+                          typeOfTrips: 'completed',
+                        ))
                   ]),
                 ),
               ],

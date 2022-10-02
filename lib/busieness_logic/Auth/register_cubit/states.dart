@@ -15,7 +15,12 @@ class RegisterSuccessState extends RegisterStates
 
   RegisterSuccessState(this.loginModel);
 }
+class RegisterwrongState extends RegisterStates
+{
+final LoginModel? loginModel;
 
+RegisterwrongState(this.loginModel);
+}
 class RegisterErrorState extends RegisterStates
 {
   final String error;

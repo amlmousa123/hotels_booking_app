@@ -2,6 +2,7 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:hotels_booking_app/presentation/Auth/Screens/onBoarding_screen.dart';
 
 import '../../../busieness_logic/Auth/login_cubit/cubit.dart';
 import '../../../busieness_logic/Auth/login_cubit/states.dart';
@@ -23,19 +24,14 @@ class LoginWidget extends StatelessWidget {
       create: (context) => LoginCubit(),
       child: BlocConsumer<LoginCubit, LoginStates>(
         listener: (context, state) {
-          if (state is LoginSuccessState) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => HomeExploreScreen(animationController: econtroller,),
-              ),
-            );
-          }
+
         },
         builder: (context, state) {
           return Scaffold(
+            backgroundColor: Colors.white,
             appBar: AppBar(
                 backgroundColor: Colors.white,
+                elevation: 0.0,
                 leading: IconButton(
                   icon: const Icon(Icons.arrow_back,color: Colors.black,) ,
                   onPressed: () {
@@ -261,22 +257,35 @@ class LoginWidget extends StatelessWidget {
                           20.0,
                         ),
                       ),
-                      child: ConditionalBuilder(
+                      child:
+                      ConditionalBuilder(
                         condition: state is! LoginLoadingState,
                         builder: (BuildContext context) =>MaterialButton(
                           height: 30.0,
                           onPressed: () {
                             if (formKey.currentState!.validate()) {
+                              print("gggggggggggggggg");
                               LoginCubit.get(context).userLogin(
                                 email: emailController.text,
                                 password: passwordController.text,
                               );
-                              Navigator.push(
+                              if(state is LoginSuccessState) {
+                                var snackBar = SnackBar(content: Text(((state).loginModel?.status?.title?.en)!));
+                                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
+                                Navigator.push(
                                 context,
                                 MaterialPageRoute(
+
                                   builder: (context) => Profile_Widget(),
                                 ),
                               );
+                              }
+                              else if(state is LoginwrongState)
+                              {
+                                var snackBar = SnackBar(content: Text(((state).error.status?.title?.en)!));
+                                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                              }
                             }
                           },
                           child: const Text(

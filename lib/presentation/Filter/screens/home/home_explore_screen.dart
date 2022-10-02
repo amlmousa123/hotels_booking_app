@@ -16,8 +16,10 @@ import 'package:provider/provider.dart';
 import '../../../../busieness_logic/FilterCubit/cubit.dart';
 import '../../../../busieness_logic/FilterCubit/states.dart';
 
+import '../../../../constants/strings.dart';
 import '../../../../data/Filter/models/Filter/Search/hotel.dart';
 import '../../../../modules/explore/home_explore_slider_view.dart';
+import '../../../Booking/screens/booking_screen.dart';
 import '../../widgets/NoHotelsFound.dart';
 import '../../widgets/bottom_top_move_animation_view.dart';
 import '../../widgets/common_card.dart';
@@ -86,7 +88,7 @@ class _HomeExploreScreenState extends State<HomeExploreScreen>
   Widget build(BuildContext context) {
     sliderImageHieght = MediaQuery.of(context).size.width * 1.3;
     return Scaffold(
-      key:UniqueKey(),
+     // key:UniqueKey(),
       backgroundColor: Colors.white,
       body: BottomTopMoveAnimationView(
         animationController: widget.animationController,

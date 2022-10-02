@@ -4,6 +4,7 @@ import 'package:hotels_booking_app/busieness_logic/Auth/register_cubit/states.da
 import '../../../constants/end_points.dart';
 import '../../../data/Auth/models/login_model.dart';
 import '../../../data/Auth/web_services/dio_helper.dart';
+import '../../ProfileCubit/cubit.dart';
 
 
 
@@ -25,9 +26,14 @@ class RegisterCubit extends Cubit<RegisterStates> {
       'password': password,
       'password_confirmation' : confirmPassword,
     }).then((value) {
-      print(value.toString());
-      loginModel = LoginModel.fromJson(value.data);
-      emit(RegisterSuccessState(loginModel));
+      print("hhhhhhhhhhhhhh$value");
+      if(loginModel?.status?.type=="1")
+      {
+        loginModel=LoginModel.fromJson(value.data);
+      print((loginModel?.data?.api_token)!);
+      emit(RegisterSuccessState(loginModel!));}
+      else
+        emit(RegisterwrongState(loginModel!));
     }).catchError((error) {
       print(" erorrrrrrrrrrrrrrrrrrrrrrrr${error.toString()}");
       emit(RegisterErrorState(error.toString()));

@@ -1,4 +1,5 @@
 
+import 'package:hotels_booking_app/busieness_logic/Auth/login_cubit/cubit.dart';
 import 'package:hotels_booking_app/data/Booking/models/booking_%20model.dart';
 import 'package:hotels_booking_app/data/Booking/models/response_model.dart';
 import 'package:hotels_booking_app/data/Booking/web_services/booking_webServices.dart';
@@ -11,7 +12,7 @@ class BookingRepo {
   Future<StatusResponse> createBooking(int hotelId) async {
     return await bookingWebServices.createBooking(
         token:
-            '4JW2g2z2RjKCnBFEGY42VqphuNuhzw8y9jbhwU73ypb6RbN2If26kMnyQM0P',
+           (LoginCubit.token)!,
         hotelId: hotelId);
   }
 
@@ -25,7 +26,7 @@ class BookingRepo {
     return await bookingWebServices.getMyBooking(
       bookingType,
       count,
-      '4JW2g2z2RjKCnBFEGY42VqphuNuhzw8y9jbhwU73ypb6RbN2If26kMnyQM0P',
+        (LoginCubit.token)!,
     );
   }
 }

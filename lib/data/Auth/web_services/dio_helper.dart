@@ -24,13 +24,11 @@ class DioHelper {
 
   static Future<Response> postData({
     required String url,
-    Map<String, dynamic>? query,
-    String? api_token,
+
+
     required Map<String, dynamic> body,
   }) async {
-    dio?.options.headers = {
-      if (api_token != null) 'token': api_token,
-    };
+      print("fffffffffffffffff$url  $body");
     return await dio!.post(url, data: body);
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hotels_booking_app/busieness_logic/Auth/login_cubit/cubit.dart';
 
 import '../../../busieness_logic/ProfileCubit/cubit.dart';
 import '../Widgets/Profile_widget.dart';
@@ -15,13 +16,14 @@ class _Profile_screenState extends State<Profile_screen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    BlocProvider.of<ProfileCubit>(context).getprofileinfo("dHlbidFF9j1tptoFhvFM8VlQzqrW428SwVULIoqwvSwamZJ1B0csMMr13xvT");
+    LoginCubit.getpref();
+    BlocProvider.of<ProfileCubit>(context).getprofileinfo((LoginCubit.token)!);
   }
   @override
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-    BlocProvider.of<ProfileCubit>(context).getprofileinfo("dHlbidFF9j1tptoFhvFM8VlQzqrW428SwVULIoqwvSwamZJ1B0csMMr13xvT");
+    BlocProvider.of<ProfileCubit>(context).getprofileinfo((LoginCubit.token)!);
   }
   @override
   Widget build(BuildContext context) {

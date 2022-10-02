@@ -20,4 +20,10 @@ class LoginErrorState extends LoginStates
 
   LoginErrorState(this.error);
 }
+class LoginwrongState extends LoginStates
+{
+  final LoginModel error;
+
+  LoginwrongState(this.error);
+}
 
